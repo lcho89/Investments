@@ -1,0 +1,326 @@
+{
+  "id": "investment-research",
+  "displayName": "Investment Research Orchestrator",
+  "description": "Hierarchical investment research system: sector analysts → portfolio managers → CIO. Covers Nuclear, Commodities, Energy, and Technology themes.",
+  "version": "0.1.0",
+  "category": "connector",
+  "capabilities": [
+    "agents.managed.read",
+    "agents.managed.write",
+    "routines.managed.read",
+    "routines.managed.write",
+    "issues.read",
+    "issues.write",
+    "tools.register"
+  ],
+  "entrypoints": {
+    "worker": "dist/index.js"
+  },
+  "instanceConfigSchema": {
+    "type": "object",
+    "properties": {
+      "newsApiKey": {
+        "type": "string",
+        "description": "NewsAPI key (newsapi.org) for market news"
+      },
+      "fmpApiKey": {
+        "type": "string",
+        "description": "Financial Modeling Prep API key for price data and fundamentals"
+      },
+      "repoPath": {
+        "type": "string",
+        "description": "Absolute path to the Investments repo (for reading/writing theses)",
+        "default": "/home/user/Investments"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "get_holdings",
+      "displayName": "Get Portfolio Holdings",
+      "description": "Retrieve current portfolio positions. Optionally filter by theme (nuclear|commodities|energy|tech|broad) or account (brokerage|brokeragelink_roth|hsa).",
+      "parametersSchema": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "enum": ["nuclear", "commodities", "energy", "tech", "broad"],
+            "description": "Filter by investment theme"
+          },
+          "account": {
+            "type": "string",
+            "enum": ["brokerage", "brokeragelink_roth", "hsa"],
+            "description": "Filter by account"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_account_summary",
+      "displayName": "Get Account Summary",
+      "description": "Get aggregated portfolio value and position count by theme and account.",
+      "parametersSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "search_sec_edgar",
+      "displayName": "Search SEC EDGAR",
+      "description": "Search SEC EDGAR for filings (10-K, 10-Q, 8-K, DEF 14A) for a ticker or company name. Returns filing metadata and optionally fetches filing text.",
+      "parametersSchema": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Ticker symbol or company name"
+          },
+          "formType": {
+            "type": "string",
+            "description": "Filing form type, e.g. 10-K, 10-Q, 8-K",
+            "default": "10-K"
+          },
+          "fetchText": {
+            "type": "boolean",
+            "description": "If true, fetch and return the text of the most recent filing",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "fetch_market_news",
+      "displayName": "Fetch Market News",
+      "description": "Fetch recent news articles for a ticker symbol or topic. Requires NewsAPI key.",
+      "parametersSchema": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Ticker symbol or search query (e.g. 'uranium spot price')"
+          },
+          "days": {
+            "type": "number",
+            "description": "Number of days of news to retrieve",
+            "default": 7
+          },
+          "maxArticles": {
+            "type": "number",
+            "description": "Maximum number of articles to return",
+            "default": 10
+          }
+        }
+      }
+    },
+    {
+      "name": "get_price_data",
+      "displayName": "Get Price Data",
+      "description": "Get price history, key financials, and ratios for a ticker. Returns current price, 52-week range, P/E, EV/EBITDA, revenue, and more. Requires FMP API key.",
+      "parametersSchema": {
+        "type": "object",
+        "required": ["symbol"],
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Ticker symbol (e.g. CEG, URNM)"
+          },
+          "includeFinancials": {
+            "type": "boolean",
+            "description": "Include income statement and balance sheet highlights",
+            "default": true
+          }
+        }
+      }
+    },
+    {
+      "name": "read_thesis",
+      "displayName": "Read Investment Thesis",
+      "description": "Read the stored investment thesis for a ticker from the theses/ directory.",
+      "parametersSchema": {
+        "type": "object",
+        "required": ["symbol"],
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Ticker symbol"
+          }
+        }
+      }
+    },
+    {
+      "name": "write_thesis",
+      "displayName": "Write Investment Thesis",
+      "description": "Save or update the investment thesis for a ticker to the theses/ directory.",
+      "parametersSchema": {
+        "type": "object",
+        "required": ["symbol", "content"],
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Ticker symbol"
+          },
+          "content": {
+            "type": "string",
+            "description": "Full thesis markdown content"
+          }
+        }
+      }
+    }
+  ],
+  "agents": [
+    {
+      "agentKey": "nuclear-analyst",
+      "displayName": "Nuclear Analyst",
+      "title": "Sector Analyst — Nuclear & Uranium",
+      "role": "engineer",
+      "adapterType": "openai-compatible",
+      "instructions": {
+        "entryFile": "instructions/nuclear-analyst.md"
+      }
+    },
+    {
+      "agentKey": "commodities-analyst",
+      "displayName": "Commodities Analyst",
+      "title": "Sector Analyst — Silver, Copper & Lithium",
+      "role": "engineer",
+      "adapterType": "openai-compatible",
+      "instructions": {
+        "entryFile": "instructions/commodities-analyst.md"
+      }
+    },
+    {
+      "agentKey": "energy-analyst",
+      "displayName": "Energy Analyst",
+      "title": "Sector Analyst — Oil, Gas & Power",
+      "role": "engineer",
+      "adapterType": "openai-compatible",
+      "instructions": {
+        "entryFile": "instructions/energy-analyst.md"
+      }
+    },
+    {
+      "agentKey": "semis-analyst",
+      "displayName": "Semis & AI Analyst",
+      "title": "Sector Analyst — Semiconductors & AI Hardware",
+      "role": "engineer",
+      "adapterType": "openai-compatible",
+      "instructions": {
+        "entryFile": "instructions/semis-analyst.md"
+      }
+    },
+    {
+      "agentKey": "tech-analyst",
+      "displayName": "Tech & Software Analyst",
+      "title": "Sector Analyst — Software & Consumer Technology",
+      "role": "engineer",
+      "adapterType": "openai-compatible",
+      "instructions": {
+        "entryFile": "instructions/tech-analyst.md"
+      }
+    },
+    {
+      "agentKey": "pm-energy-commodities",
+      "displayName": "PM: Energy & Commodities",
+      "title": "Portfolio Manager — Energy & Commodities",
+      "role": "manager",
+      "adapterType": "claude-local",
+      "instructions": {
+        "entryFile": "instructions/pm-energy-commodities.md"
+      }
+    },
+    {
+      "agentKey": "pm-technology",
+      "displayName": "PM: Technology",
+      "title": "Portfolio Manager — Technology",
+      "role": "manager",
+      "adapterType": "claude-local",
+      "instructions": {
+        "entryFile": "instructions/pm-technology.md"
+      }
+    },
+    {
+      "agentKey": "portfolio-risk-analyst",
+      "displayName": "Portfolio Risk Analyst",
+      "title": "Cross-Portfolio Risk Analyst",
+      "role": "engineer",
+      "adapterType": "openai-compatible",
+      "instructions": {
+        "entryFile": "instructions/portfolio-risk-analyst.md"
+      }
+    },
+    {
+      "agentKey": "cio",
+      "displayName": "CIO",
+      "title": "Chief Investment Officer",
+      "role": "ceo",
+      "adapterType": "claude-local",
+      "instructions": {
+        "entryFile": "instructions/cio.md"
+      }
+    }
+  ],
+  "routines": [
+    {
+      "routineKey": "morning-brief",
+      "title": "Morning Market Brief",
+      "description": "Overnight moves, headlines, and early flags for any position >3% move. Runs Mon–Fri at 7am ET.",
+      "assigneeRef": { "kind": "agent", "agentKey": "cio" },
+      "triggers": [
+        {
+          "kind": "cron",
+          "label": "Weekday 7am ET",
+          "enabled": true,
+          "cronExpression": "0 7 * * 1-5",
+          "timezone": "America/New_York"
+        }
+      ]
+    },
+    {
+      "routineKey": "weekly-deep-research",
+      "title": "Weekly Deep Research",
+      "description": "Full thesis review and SEC filing digest for each sector. Runs every Monday at 8am ET.",
+      "assigneeRef": { "kind": "agent", "agentKey": "pm-energy-commodities" },
+      "triggers": [
+        {
+          "kind": "cron",
+          "label": "Monday 8am ET",
+          "enabled": true,
+          "cronExpression": "0 8 * * 1",
+          "timezone": "America/New_York"
+        }
+      ]
+    },
+    {
+      "routineKey": "portfolio-risk-check",
+      "title": "Weekly Portfolio Risk Check",
+      "description": "Correlation matrix, concentration risk, max drawdown, beta, and currency exposure analysis. Runs Fridays at 9am ET.",
+      "assigneeRef": { "kind": "agent", "agentKey": "portfolio-risk-analyst" },
+      "triggers": [
+        {
+          "kind": "cron",
+          "label": "Friday 9am ET",
+          "enabled": true,
+          "cronExpression": "0 9 * * 5",
+          "timezone": "America/New_York"
+        }
+      ]
+    },
+    {
+      "routineKey": "monthly-investment-memo",
+      "title": "Monthly Investment Memo (IC)",
+      "description": "CIO consolidates PM reports into an Investment Memo and convenes the IC with the human PM for approval. Runs 1st of month at 8am ET.",
+      "assigneeRef": { "kind": "agent", "agentKey": "cio" },
+      "triggers": [
+        {
+          "kind": "cron",
+          "label": "1st of month 8am ET",
+          "enabled": true,
+          "cronExpression": "0 8 1 * *",
+          "timezone": "America/New_York"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "investment-research",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Paperclip plugin: hierarchical investment research orchestration",
+  "paperclipPlugin": {
+    "manifest": "dist/manifest.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@paperclipai/plugin-sdk": "file:/root/.npm/_npx/43414d9b790239bb/node_modules/@paperclipai/plugin-sdk"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/node": "^24.6.0"
+  }
+}

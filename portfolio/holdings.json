@@ -1,0 +1,53 @@
+{
+  "asOf": "2026-06-09",
+  "accounts": {
+    "brokerage": {
+      "label": "Fidelity Brokerage",
+      "positions": [
+        { "symbol": "BNO",   "name": "United States Brent Oil Fund",         "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "USO",   "name": "United States Oil Fund",                "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "ET",    "name": "Energy Transfer LP",                    "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "LNG",   "name": "Cheniere Energy",                       "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "FENY",  "name": "Fidelity MSCI Energy ETF",              "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "BX",    "name": "Blackstone Inc",                        "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "HLOGF", "name": "Harvest Clean Energy (OTC)",            "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "SILJ",  "name": "ETFMG Prime Junior Silver Miners ETF",  "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "PSLV",  "name": "Sprott Physical Silver Trust",          "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "COPX",  "name": "Global X Copper Miners ETF",            "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "LITP",  "name": "Invesco Lithium & Battery Tech ETF",    "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "SGDM",  "name": "Sprott Gold Miners ETF",                "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "HGRAF", "name": "Hochschild Mining (OTC)",               "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "PANW",  "name": "Palo Alto Networks",                    "theme": "tech",        "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "TSLA",  "name": "Tesla Inc",                             "theme": "tech",        "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "MCHI",  "name": "iShares MSCI China ETF",                "theme": "tech",        "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "VTI",   "name": "Vanguard Total Stock Market ETF",       "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "FSPSX", "name": "Fidelity International Index Fund",     "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null }
+      ]
+    },
+    "brokeragelink_roth": {
+      "label": "Fidelity BrokerageLink (Roth 401k)",
+      "positions": [
+        { "symbol": "URNJ",  "name": "Sprott Junior Uranium Miners ETF",      "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "URNM",  "name": "Sprott Uranium Miners ETF",             "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "SRUUF", "name": "Sprott Physical Uranium Trust (OTC)",   "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "CEG",   "name": "Constellation Energy",                  "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "VST",   "name": "Vistra Corp",                           "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "PHYS",  "name": "Sprott Physical Gold Trust",            "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "FXAIX", "name": "Fidelity 500 Index Fund",               "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "FPADX", "name": "Fidelity Pacific Basin Fund",           "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null }
+      ]
+    },
+    "hsa": {
+      "label": "Fidelity HSA",
+      "positions": [
+        { "symbol": "VTV",   "name": "Vanguard Value ETF",                    "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "SPYI",  "name": "NEOS S&P 500 High Income ETF",          "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "DBMF",  "name": "iMGP DBi Managed Futures Strategy ETF", "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "XAR",   "name": "SPDR S&P Aerospace & Defense ETF",      "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "INVH",  "name": "Invitation Homes",                      "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "APD",   "name": "Air Products & Chemicals",              "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
+        { "symbol": "BX",    "name": "Blackstone Inc",                        "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null }
+      ]
+    }
+  }
+}
