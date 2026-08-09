@@ -4,21 +4,49 @@ import { searchSecEdgar, fetchMarketNews, getPriceData } from "./tools/research.
 import { readThesis, writeThesis } from "./tools/thesis.js";
 
 const configSchema = z.object({
-  newsApiKey: z.string().optional().describe("NewsAPI key for market news"),
-  fmpApiKey: z.string().optional().describe("Financial Modeling Prep API key"),
-  repoPath: z.string().default("/home/user/Investments").describe("Path to Investments repo"),
+  newsApiKey: z.string().optional(),
+  fmpApiKey: z.string().optional(),
+  repoPath: z.string().default(process.env.HOME ? `${process.env.HOME}/Investments` : "/home/user/Investments"),
 });
+
+type Config = z.infer<typeof configSchema>;
+
+const AGENT_KEYS = [
+  "nuclear-analyst",
+  "commodities-analyst",
+  "energy-analyst",
+  "semis-analyst",
+  "tech-analyst",
+  "pm-energy-commodities",
+  "pm-technology",
+  "portfolio-risk-analyst",
+  "cio",
+];
+
+const ROUTINE_KEYS = [
+  "morning-brief",
+  "weekly-deep-research",
+  "portfolio-risk-check",
+  "monthly-investment-memo",
+];
 
 const plugin = definePlugin({
   async setup(ctx) {
-    const cfg = configSchema.parse(await ctx.config.get());
-    const repoPath = cfg.repoPath ?? "/home/user/Investments";
+    // Config is company-scoped, so it must be read per-invocation, never at setup.
+    async function config(companyId: string): Promise<Config> {
+      try {
+        return configSchema.parse(await ctx.config.get(companyId));
+      } catch {
+        return configSchema.parse({});
+      }
+    }
 
     ctx.tools.register(
       "get_holdings",
       {
         displayName: "Get Portfolio Holdings",
-        description: "Retrieve current portfolio positions. Optionally filter by theme or account.",
+        description:
+          "Retrieve current portfolio positions. Optionally filter by theme (nuclear|commodities|energy|tech|broad) or account.",
         parametersSchema: {
           type: "object",
           properties: {
@@ -27,9 +55,10 @@ const plugin = definePlugin({
           },
         },
       },
-      async (params) => {
+      async (params, runCtx) => {
         const { theme, account } = params as { theme?: string; account?: string };
-        return { data: getHoldings(repoPath, theme, account) };
+        const cfg = await config(runCtx.companyId);
+        return { data: getHoldings(cfg.repoPath, theme, account) };
       }
     );
 
@@ -40,14 +69,18 @@ const plugin = definePlugin({
         description: "Get aggregated portfolio value and position count by theme and account.",
         parametersSchema: { type: "object", properties: {} },
       },
-      async () => ({ data: getAccountSummary(repoPath) })
+      async (_params, runCtx) => {
+        const cfg = await config(runCtx.companyId);
+        return { data: getAccountSummary(cfg.repoPath) };
+      }
     );
 
     ctx.tools.register(
       "search_sec_edgar",
       {
         displayName: "Search SEC EDGAR",
-        description: "Search SEC EDGAR for filings (10-K, 10-Q, 8-K) for a ticker or company name.",
+        description:
+          "Search SEC EDGAR for filings (10-K, 10-Q, 8-K) for a ticker or company name. Free, no API key required.",
         parametersSchema: {
           type: "object",
           required: ["query"],
@@ -59,7 +92,11 @@ const plugin = definePlugin({
         },
       },
       async (params) => {
-        const { query, formType, fetchText } = params as { query: string; formType?: string; fetchText?: boolean };
+        const { query, formType, fetchText } = params as {
+          query: string;
+          formType?: string;
+          fetchText?: boolean;
+        };
         return { data: await searchSecEdgar(query, formType ?? "10-K", fetchText ?? false) };
       }
     );
@@ -79,8 +116,13 @@ const plugin = definePlugin({
           },
         },
       },
-      async (params) => {
-        const { query, days, maxArticles } = params as { query: string; days?: number; maxArticles?: number };
+      async (params, runCtx) => {
+        const { query, days, maxArticles } = params as {
+          query: string;
+          days?: number;
+          maxArticles?: number;
+        };
+        const cfg = await config(runCtx.companyId);
         if (!cfg.newsApiKey) return { error: "NewsAPI key not configured" };
         return { data: await fetchMarketNews(query, cfg.newsApiKey, days ?? 7, maxArticles ?? 10) };
       }
@@ -100,8 +142,12 @@ const plugin = definePlugin({
           },
         },
       },
-      async (params) => {
-        const { symbol, includeFinancials } = params as { symbol: string; includeFinancials?: boolean };
+      async (params, runCtx) => {
+        const { symbol, includeFinancials } = params as {
+          symbol: string;
+          includeFinancials?: boolean;
+        };
+        const cfg = await config(runCtx.companyId);
         if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
         return { data: await getPriceData(symbol, cfg.fmpApiKey, includeFinancials ?? true) };
       }
@@ -118,9 +164,10 @@ const plugin = definePlugin({
           properties: { symbol: { type: "string" } },
         },
       },
-      async (params) => {
+      async (params, runCtx) => {
         const { symbol } = params as { symbol: string };
-        const result = readThesis(repoPath, symbol);
+        const cfg = await config(runCtx.companyId);
+        const result = readThesis(cfg.repoPath, symbol);
         return { data: result, content: result.content ?? undefined };
       }
     );
@@ -139,37 +186,17 @@ const plugin = definePlugin({
           },
         },
       },
-      async (params) => {
+      async (params, runCtx) => {
         const { symbol, content } = params as { symbol: string; content: string };
-        return { data: writeThesis(repoPath, symbol, content) };
+        const cfg = await config(runCtx.companyId);
+        return { data: writeThesis(cfg.repoPath, symbol, content) };
       }
     );
 
-    // Auto-provision agents and routines when a company is created or on startup
-    const AGENT_KEYS = [
-      "nuclear-analyst",
-      "commodities-analyst",
-      "energy-analyst",
-      "semis-analyst",
-      "tech-analyst",
-      "pm-energy-commodities",
-      "pm-technology",
-      "portfolio-risk-analyst",
-      "cio",
-    ];
-    const ROUTINE_KEYS = [
-      "morning-brief",
-      "weekly-deep-research",
-      "portfolio-risk-check",
-      "monthly-investment-memo",
-    ];
-
     async function provisionCompany(companyId: string) {
-      ctx.logger.info("Provisioning agents and routines", { companyId });
       for (const key of AGENT_KEYS) {
         try {
           await ctx.agents.managed.reconcile(key, companyId);
-          ctx.logger.info(`Reconciled agent ${key}`, { companyId });
         } catch (err: unknown) {
           ctx.logger.error(`Failed to reconcile agent ${key}`, { companyId, err });
         }
@@ -177,28 +204,26 @@ const plugin = definePlugin({
       for (const key of ROUTINE_KEYS) {
         try {
           await ctx.routines.managed.reconcile(key, companyId);
-          ctx.logger.info(`Reconciled routine ${key}`, { companyId });
         } catch (err: unknown) {
           ctx.logger.error(`Failed to reconcile routine ${key}`, { companyId, err });
         }
       }
+      ctx.logger.info("Provisioned agents and routines", { companyId });
     }
 
     ctx.events.on("company.created", async (event) => {
       await provisionCompany(event.companyId);
     });
 
-    // Provision for all existing companies on startup
     try {
-      const companies = await ctx.companies.list();
-      for (const company of companies) {
+      for (const company of await ctx.companies.list()) {
         await provisionCompany(company.id);
       }
     } catch (err: unknown) {
-      ctx.logger.warn("Could not list companies on startup", { err });
+      ctx.logger.warn("Could not provision existing companies at startup", { err });
     }
 
-    ctx.logger.info("Investment Research plugin ready", { repoPath });
+    ctx.logger.info("Investment Research plugin ready");
   },
 
   async onHealth() {
