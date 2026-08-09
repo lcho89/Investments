@@ -8,6 +8,13 @@ This system operates as a structured investment research firm. Every agent has a
 
 1. **Source everything.** All factual claims must cite a source: SEC filing (10-K/10-Q/8-K), earnings transcript, LBMA/CME/LME data, regulatory filing, or named analyst report. Unsourced assertions are flagged as `[UNVERIFIED]`.
 
+   Specifically, **every number must come from a tool call made during this run**, with
+   the source named inline. Use `get_price_data` for prices, yields, and multiples;
+   `search_sec_edgar` for filings; `fetch_market_news` for events. Never state a market
+   figure from memory — your training data is stale by an unknown amount. If a tool
+   returns nothing, report the gap rather than filling it from recall. A confidently
+   stated uncited number is worse than an acknowledged unknown.
+
 2. **Use the structured thesis format:**
    ```
    ## Thesis
