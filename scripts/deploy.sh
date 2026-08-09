@@ -75,6 +75,65 @@ curl -s -X POST "$API/plugins/$PLUGIN_ID/config" -H "Content-Type: application/j
   -d "{\"repoPath\":\"$REPO_DIR\",\"newsApiKey\":\"${NEWSAPI_KEY:-}\",\"fmpApiKey\":\"${FMP_API_KEY:-}\"}" >/dev/null
 echo "==> Plugin config saved."
 
+# ── 6b. Load agent instructions + reporting hierarchy ───────────────
+# The manifest declares agents with empty instructions; the real mandates
+# live in plugin/instructions/*.md and are pushed here.
+python3 - "$COMPANY_ID" "$REPO_DIR" <<'PY'
+import json, sys, urllib.request
+
+company_id, repo = sys.argv[1], sys.argv[2]
+API = "http://localhost:3100/api"
+
+# agent display name -> (instruction file stem, manager display name or None)
+ORG = {
+    "Nuclear Analyst":            ("nuclear-analyst",        "PM: Energy & Commodities"),
+    "Commodities Analyst":        ("commodities-analyst",    "PM: Energy & Commodities"),
+    "Energy Analyst":             ("energy-analyst",         "PM: Energy & Commodities"),
+    "Semis & AI Analyst":         ("semis-analyst",          "PM: Technology"),
+    "Tech & Software Analyst":    ("tech-analyst",           "PM: Technology"),
+    "PM: Energy & Commodities":   ("pm-energy-commodities",  "CIO"),
+    "PM: Technology":             ("pm-technology",          "CIO"),
+    "Portfolio Risk Analyst":     ("portfolio-risk-analyst", "CIO"),
+    "CIO":                        ("cio",                    None),
+}
+
+def call(method, path, payload=None):
+    data = json.dumps(payload).encode() if payload is not None else None
+    req = urllib.request.Request(
+        f"{API}{path}", data=data, method=method,
+        headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req) as r:
+        return json.loads(r.read() or "{}")
+
+agents = call("GET", f"/companies/{company_id}/agents")
+by_name = {a["name"]: a["id"] for a in agents}
+
+for name, (stem, manager) in ORG.items():
+    aid = by_name.get(name)
+    if not aid:
+        print(f"  ! {name}: agent not found, skipped")
+        continue
+
+    try:
+        body = open(f"{repo}/plugin/instructions/{stem}.md", encoding="utf-8").read()
+        call("PUT", f"/agents/{aid}/instructions-bundle/file",
+             {"path": "AGENTS.md", "content": body})
+        status = "instructions loaded"
+    except Exception as e:
+        status = f"instructions FAILED ({e})"
+
+    if manager and manager in by_name:
+        try:
+            call("PATCH", f"/agents/{aid}", {"reportsTo": by_name[manager]})
+            status += f", reports to {manager}"
+        except Exception as e:
+            status += f", reportsTo FAILED ({e})"
+
+    print(f"  - {name}: {status}")
+PY
+echo "==> Instructions and hierarchy applied."
+
 # ── 7. Verify ───────────────────────────────────────────────────────
 echo ""
 echo "==> Agents:"
