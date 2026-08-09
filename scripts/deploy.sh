@@ -85,13 +85,15 @@ company_id, repo = sys.argv[1], sys.argv[2]
 API = "http://localhost:3100/api"
 
 # display name -> (instruction stem, manager, model, monthly budget USD)
-# Analysts do structured extraction (cheap model); PMs/CIO do judgment (stronger).
+# Analysts run Sonnet: they are where facts enter the system, and Haiku produced
+# plausible-looking but incoherent analysis (probabilities summing past 100%,
+# unexplained rating changes) even when its sourcing was correct.
 ORG = {
-    "Nuclear Analyst":          ("nuclear-analyst",        "PM: Energy & Commodities", "claude-haiku-4-5",  3),
-    "Commodities Analyst":      ("commodities-analyst",    "PM: Energy & Commodities", "claude-haiku-4-5",  3),
-    "Energy Analyst":           ("energy-analyst",         "PM: Energy & Commodities", "claude-haiku-4-5",  3),
-    "Semis & AI Analyst":       ("semis-analyst",          "PM: Technology",           "claude-haiku-4-5",  3),
-    "Tech & Software Analyst":  ("tech-analyst",           "PM: Technology",           "claude-haiku-4-5",  3),
+    "Nuclear Analyst":          ("nuclear-analyst",        "PM: Energy & Commodities", "claude-sonnet-4-6", 8),
+    "Commodities Analyst":      ("commodities-analyst",    "PM: Energy & Commodities", "claude-sonnet-4-6", 8),
+    "Energy Analyst":           ("energy-analyst",         "PM: Energy & Commodities", "claude-sonnet-4-6", 8),
+    "Semis & AI Analyst":       ("semis-analyst",          "PM: Technology",           "claude-sonnet-4-6", 8),
+    "Tech & Software Analyst":  ("tech-analyst",           "PM: Technology",           "claude-sonnet-4-6", 8),
     "Portfolio Risk Analyst":   ("portfolio-risk-analyst", "CIO",                      "claude-sonnet-4-6", 5),
     "PM: Energy & Commodities": ("pm-energy-commodities",  "CIO",                      "claude-sonnet-4-6", 10),
     "PM: Technology":           ("pm-technology",          "CIO",                      "claude-sonnet-4-6", 10),

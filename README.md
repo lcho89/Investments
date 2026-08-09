@@ -60,7 +60,7 @@ source ~/.bashrc
 | PM: Energy & Commodities | Sonnet 4.6 | $10 | CIO |
 | PM: Technology | Sonnet 4.6 | $10 | CIO |
 | Portfolio Risk Analyst | Sonnet 4.6 | $5 | CIO |
-| Nuclear / Commodities / Energy / Semis / Tech analysts | Haiku 4.5 | $3 each | their PM |
+| Nuclear / Commodities / Energy / Semis / Tech analysts | Sonnet 4.6 | $8 each | their PM |
 
 Agents run through the Claude Code CLI (`claude_local` adapter), so usage draws on
 the Claude subscription rather than a separate API bill.
