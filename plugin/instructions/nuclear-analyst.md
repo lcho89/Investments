@@ -35,19 +35,31 @@ For each routine task, produce:
 
 Always cite sources. Tag confidence level: High / Medium / Speculative.
 
-## Coverage Universe (from portfolio/holdings.json, 2026-08-08)
 
-You now cover the full portfolio, not a sample. Your sector's actual holdings are:
+## Coverage Universe (portfolio/holdings.json, as of 2026-08-08)
 
-AFMJF ANLDF ASPI BQSSF BWXT CCJ CEG DNN FCUUF FMCXF GLATF LTSRF NXE OKLO PENMF SMR SRUUF STTDF UEC URG URNJ URNM UUUU UWEFF VST VULNF WSTRF
+**Nuclear:** ASPI BWXT CEG NXE SRUUF UEC URNJ URNM UUUU VST
 
-Call `get_holdings` with your theme filter at the start of every run to get live
-quantities and cost basis — the list above is a summary, the file is the source of
-truth. Positions appear across multiple account sleeves; aggregate before judging
-concentration or position size.
+Accounts: Stock brokerage (taxable) $201,641 | 401k $99,688 | Roth $30,254 — total $331,583.
+Call `get_holdings` at the start of every run for live quantities and cost basis.
+A ticker can appear in more than one account; aggregate before judging position size.
+Tax placement matters: the taxable account carries capital-gains consequences on
+trims, the 401k and Roth do not.
 
-Names you do not recognize are likely small OTC or junior miners. Research them or
-report them as uncovered — do not silently omit them.
+## Where to Save Your Work (required)
+
+All paths are **relative to the repo root** (your working directory). Never write to
+absolute paths like `/research/` — those land outside the project and are lost.
+
+- **Thesis per ticker:** use the `write_thesis` tool. It writes `theses/<TICKER>.md`.
+  Do not create thesis files by hand.
+- **Your periodic report:** write to `reports/<your-slug>/YYYY-MM-DD.md`
+  (e.g. `reports/nuclear-analyst/2026-08-15.md`). Create the folder if missing.
+- **Nothing anywhere else.** If you are about to write a path that does not start with
+  `theses/` or `reports/`, stop and use one of those instead.
+
+Also post your findings in the issue thread — the file is the durable record, the
+comment is what your PM reads.
 
 ---
 

@@ -56,18 +56,35 @@ Use `get_holdings` to retrieve current positions and `get_price_data` to assess 
 
 Tag all risk assessments: **High / Medium / Low** probability × **High / Medium / Low** impact.
 
-## Coverage Universe (from portfolio/holdings.json, 2026-08-08)
 
-**Broad:** CG DBA DBMF DLR ETHA EWY FHLC FSMAX FSPSX FTIHX FXAIX IBIT JEPI JLGMX KKR LMT PHYS QQQ SCHD SMH VFFVX VFIFX VIVIX VOO VT VTI VWO XAR
-**Tech:** AAPL AMD AVDX AVGO BABA BYND CRWD CYBR DDOG DIS EMQQ ESTC MCHI MDB MNDY MRVL MSFT MU NBIS NKE NOW NU NVDA PANW PLTR PYPL RSKD SE SEV SIRI SNOW SPCX SQ TEAM TSLA TSM UBER YOU ZS
-**Energy:** BP BX DVN EQT FENY GEV LNG MMP PBD PWR
-**Commodities:** AG CEF COPP COPX HGRAF LIT LITP PAAS PSLV SBSW SGDJ SGDM SILJ SLV SLVR
-**Nuclear:** AFMJF ANLDF ASPI BQSSF BWXT CCJ CEG DNN FCUUF FMCXF GLATF LTSRF NXE OKLO PENMF SMR SRUUF STTDF UEC URG URNJ URNM UUUU UWEFF VST VULNF WSTRF
-**Other:** FOSYF
+## Coverage Universe (portfolio/holdings.json, as of 2026-08-08)
 
-Total portfolio ~$653,482 across 14 account sleeves.
-Call `get_holdings` for live quantities and cost basis. Aggregate a ticker across
-sleeves before assessing concentration — several names appear in more than one.
+**Broad:** DBMF FHLC FSMAX FSPSX FTIHX FXAIX JLGMX PHYS SPCX VFFVX VFIFX VIVIX VTI XAR
+**Commodities:** COPP COPX LITP PSLV SGDM SILJ SLVR
+**Energy:** BX EQT FENY GEV LNG PWR
+**Nuclear:** ASPI BWXT CEG NXE SRUUF UEC URNJ URNM UUUU VST
+**Tech:** AVGO CRWD MCHI MRVL MU NBIS NVDA PANW TSLA TSM
+
+Accounts: Stock brokerage (taxable) $201,641 | 401k $99,688 | Roth $30,254 — total $331,583.
+Call `get_holdings` at the start of every run for live quantities and cost basis.
+A ticker can appear in more than one account; aggregate before judging position size.
+Tax placement matters: the taxable account carries capital-gains consequences on
+trims, the 401k and Roth do not.
+
+## Where to Save Your Work (required)
+
+All paths are **relative to the repo root** (your working directory). Never write to
+absolute paths like `/research/` — those land outside the project and are lost.
+
+- **Thesis per ticker:** use the `write_thesis` tool. It writes `theses/<TICKER>.md`.
+  Do not create thesis files by hand.
+- **Your periodic report:** write to `reports/<your-slug>/YYYY-MM-DD.md`
+  (e.g. `reports/nuclear-analyst/2026-08-15.md`). Create the folder if missing.
+- **Nothing anywhere else.** If you are about to write a path that does not start with
+  `theses/` or `reports/`, stop and use one of those instead.
+
+Also post your findings in the issue thread — the file is the durable record, the
+comment is what your PM reads.
 
 ---
 
