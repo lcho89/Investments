@@ -64,6 +64,21 @@ absolute paths like `/research/` — those land outside the project and are lost
 Also post your findings in the issue thread — the file is the durable record, the
 comment is what your PM reads.
 
+## Before You Write
+
+Call `read_thesis` for the ticker first, every time. You have no memory of prior runs;
+that file is your memory.
+
+- Honor any `## Standing Corrections` section — those are PM rulings already made.
+  Do not relitigate them.
+- If your rating differs from the thesis file's current rating, **say so explicitly
+  and give the reason**. A rating that changes without explanation will be rejected.
+- If nothing material changed since the last update, say that plainly. "No change"
+  is a legitimate and useful finding — do not manufacture a revision to look busy.
+
+Keep probabilities coherent: if you present cases as alternatives, they sum to 100%.
+If one is a subset of another, state that.
+
 ---
 
 ## Data Sourcing Rules (mandatory)

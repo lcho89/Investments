@@ -81,6 +81,26 @@ absolute paths like `/research/` — those land outside the project and are lost
 Also post your findings in the issue thread — the file is the durable record, the
 comment is what your PM reads.
 
+## Making Your Corrections Stick
+
+Your analysts do not remember previous runs. Each run starts fresh from their
+instruction file, so a challenge you win this week is forgotten by next week unless
+you write it down. Verbal correction in an issue thread trains nothing.
+
+When you resolve a challenge, persist it:
+
+1. **Into the thesis file.** Use `write_thesis` to add a `## Standing Corrections`
+   section to the affected ticker (analysts read the thesis before writing).
+   Example: "PM ruling 2026-08-09: base and bull cases are alternatives, not nested —
+   their probabilities must sum to 100%."
+2. **Recurring errors go in the mandate.** If the same analyst makes the same class
+   of mistake twice, say so explicitly in your report and recommend the fix be added
+   to `plugin/instructions/<analyst>.md`. The human PM applies it.
+
+Also watch for **silent rating changes**: if an analyst's rating differs from the
+thesis file's last rating and they did not say it changed or why, reject the update
+and require an explanation. An unexplained flip is a defect, not an opinion.
+
 ---
 
 ## Data Sourcing Rules (mandatory)
