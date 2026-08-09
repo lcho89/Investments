@@ -84,17 +84,18 @@ import json, sys, urllib.request
 company_id, repo = sys.argv[1], sys.argv[2]
 API = "http://localhost:3100/api"
 
-# agent display name -> (instruction file stem, manager display name or None)
+# display name -> (instruction stem, manager, model, monthly budget USD)
+# Analysts do structured extraction (cheap model); PMs/CIO do judgment (stronger).
 ORG = {
-    "Nuclear Analyst":            ("nuclear-analyst",        "PM: Energy & Commodities"),
-    "Commodities Analyst":        ("commodities-analyst",    "PM: Energy & Commodities"),
-    "Energy Analyst":             ("energy-analyst",         "PM: Energy & Commodities"),
-    "Semis & AI Analyst":         ("semis-analyst",          "PM: Technology"),
-    "Tech & Software Analyst":    ("tech-analyst",           "PM: Technology"),
-    "PM: Energy & Commodities":   ("pm-energy-commodities",  "CIO"),
-    "PM: Technology":             ("pm-technology",          "CIO"),
-    "Portfolio Risk Analyst":     ("portfolio-risk-analyst", "CIO"),
-    "CIO":                        ("cio",                    None),
+    "Nuclear Analyst":          ("nuclear-analyst",        "PM: Energy & Commodities", "claude-haiku-4-5",  3),
+    "Commodities Analyst":      ("commodities-analyst",    "PM: Energy & Commodities", "claude-haiku-4-5",  3),
+    "Energy Analyst":           ("energy-analyst",         "PM: Energy & Commodities", "claude-haiku-4-5",  3),
+    "Semis & AI Analyst":       ("semis-analyst",          "PM: Technology",           "claude-haiku-4-5",  3),
+    "Tech & Software Analyst":  ("tech-analyst",           "PM: Technology",           "claude-haiku-4-5",  3),
+    "Portfolio Risk Analyst":   ("portfolio-risk-analyst", "CIO",                      "claude-sonnet-4-6", 5),
+    "PM: Energy & Commodities": ("pm-energy-commodities",  "CIO",                      "claude-sonnet-4-6", 10),
+    "PM: Technology":           ("pm-technology",          "CIO",                      "claude-sonnet-4-6", 10),
+    "CIO":                      ("cio",                    None,                       "claude-fable-5",    20),
 }
 
 def call(method, path, payload=None):
@@ -109,28 +110,34 @@ def call(method, path, payload=None):
 agents = call("GET", f"/companies/{company_id}/agents")
 by_name = {a["name"]: a["id"] for a in agents}
 
-for name, (stem, manager) in ORG.items():
+for name, (stem, manager, model, budget) in ORG.items():
     aid = by_name.get(name)
     if not aid:
         print(f"  ! {name}: agent not found, skipped")
         continue
 
-    try:
-        body = open(f"{repo}/plugin/instructions/{stem}.md", encoding="utf-8").read()
-        call("PUT", f"/agents/{aid}/instructions-bundle/file",
-             {"path": "AGENTS.md", "content": body})
-        status = "instructions loaded"
-    except Exception as e:
-        status = f"instructions FAILED ({e})"
-
+    patch = {
+        "adapterType": "claude_local",
+        "adapterConfig": {
+            "model": model,
+            "cwd": repo,
+            "instructionsFilePath": f"{repo}/plugin/instructions/{stem}.md",
+            "maxTurnsPerRun": 40,
+            "timeoutSec": 900,
+        },
+        "budgetMonthlyCents": budget * 100,
+    }
     if manager and manager in by_name:
-        try:
-            call("PATCH", f"/agents/{aid}", {"reportsTo": by_name[manager]})
-            status += f", reports to {manager}"
-        except Exception as e:
-            status += f", reportsTo FAILED ({e})"
+        patch["reportsTo"] = by_name[manager]
 
-    print(f"  - {name}: {status}")
+    try:
+        call("PATCH", f"/agents/{aid}", patch)
+        line = f"{model}, ${budget}/mo"
+        if manager:
+            line += f", reports to {manager}"
+        print(f"  - {name}: {line}")
+    except Exception as e:
+        print(f"  ! {name}: FAILED ({e})")
 PY
 echo "==> Instructions and hierarchy applied."
 
@@ -140,4 +147,5 @@ echo "==> Agents:"
 npx paperclipai agent list -C "$COMPANY_ID" 2>/dev/null || true
 echo ""
 echo "Done. UI: http://127.0.0.1:3100"
-echo "Enable routines in UI (Routines tab) — or leave paused and use 'Run now' to test."
+echo "Agents run via the Claude Code CLI. If not installed:  npm install -g @anthropic-ai/claude-code && claude"
+echo "Then enable routines in the UI, or use Run now to test one cycle."
