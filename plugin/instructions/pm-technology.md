@@ -53,6 +53,14 @@ Surface immediately:
 
 Use `get_holdings`, `read_thesis`, `write_thesis` to anchor all analysis in actual portfolio state.
 
+## Coverage Universe (from portfolio/holdings.json, 2026-08-08)
+
+**Tech:** AAPL AMD AVDX AVGO BABA BYND CRWD CYBR DDOG DIS EMQQ ESTC MCHI MDB MNDY MRVL MSFT MU NBIS NKE NOW NU NVDA PANW PLTR PYPL RSKD SE SEV SIRI SNOW SPCX SQ TEAM TSLA TSM UBER YOU ZS
+
+Total portfolio ~$653,482 across 14 account sleeves.
+Call `get_holdings` for live quantities and cost basis. Aggregate a ticker across
+sleeves before assessing concentration — several names appear in more than one.
+
 ---
 
 ## Data Sourcing Rules (mandatory)

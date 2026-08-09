@@ -1,52 +1,2182 @@
 {
-  "asOf": "2026-06-09",
+  "asOf": "2026-08-08",
+  "source": "Google Sheets 'Investments' (1bJpqT-sqQiyIkc5p4shWfaIZU3W1zQoPgpdfiy1bZM4), modified 2026-08-08",
+  "note": "One entry per block found in the tracker. 'category' is a guess where marked unknown; relabel as needed. Historical/realized-gain blocks excluded.",
   "accounts": {
-    "brokerage": {
-      "label": "Fidelity Brokerage",
+    "block_2": {
+      "label": "Sleeve at row 2",
+      "category": "unknown",
+      "sourceRow": 2,
+      "totalValue": 4860.69,
       "positions": [
-        { "symbol": "BNO",   "name": "United States Brent Oil Fund",         "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "USO",   "name": "United States Oil Fund",                "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "ET",    "name": "Energy Transfer LP",                    "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "LNG",   "name": "Cheniere Energy",                       "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "FENY",  "name": "Fidelity MSCI Energy ETF",              "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "BX",    "name": "Blackstone Inc",                        "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "HLOGF", "name": "Harvest Clean Energy (OTC)",            "theme": "energy",      "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "SILJ",  "name": "ETFMG Prime Junior Silver Miners ETF",  "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "PSLV",  "name": "Sprott Physical Silver Trust",          "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "COPX",  "name": "Global X Copper Miners ETF",            "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "LITP",  "name": "Invesco Lithium & Battery Tech ETF",    "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "SGDM",  "name": "Sprott Gold Miners ETF",                "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "HGRAF", "name": "Hochschild Mining (OTC)",               "theme": "commodities", "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "PANW",  "name": "Palo Alto Networks",                    "theme": "tech",        "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "TSLA",  "name": "Tesla Inc",                             "theme": "tech",        "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "MCHI",  "name": "iShares MSCI China ETF",                "theme": "tech",        "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "VTI",   "name": "Vanguard Total Stock Market ETF",       "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "FSPSX", "name": "Fidelity International Index Fund",     "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null }
+        {
+          "symbol": "VTI",
+          "theme": "broad",
+          "qty": 7.0,
+          "avgCost": 310.05,
+          "lastPrice": 381.78,
+          "totalValue": 2672.46
+        },
+        {
+          "symbol": "JEPI",
+          "theme": "broad",
+          "qty": 22.0,
+          "avgCost": 54.45,
+          "lastPrice": 57.58,
+          "totalValue": 1266.76
+        },
+        {
+          "symbol": "MCHI",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 57.31,
+          "lastPrice": 56.57,
+          "totalValue": 848.55
+        },
+        {
+          "symbol": "PBD",
+          "theme": "energy",
+          "qty": 4.0,
+          "avgCost": 30.01,
+          "lastPrice": 18.23,
+          "totalValue": 72.92
+        }
       ]
     },
-    "brokeragelink_roth": {
-      "label": "Fidelity BrokerageLink (Roth 401k)",
+    "block_74": {
+      "label": "Brokerage sleeve (tech + nuclear)",
+      "category": "brokerage",
+      "sourceRow": 74,
+      "totalValue": 75990.9,
       "positions": [
-        { "symbol": "URNJ",  "name": "Sprott Junior Uranium Miners ETF",      "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "URNM",  "name": "Sprott Uranium Miners ETF",             "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "SRUUF", "name": "Sprott Physical Uranium Trust (OTC)",   "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "CEG",   "name": "Constellation Energy",                  "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "VST",   "name": "Vistra Corp",                           "theme": "nuclear",     "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "PHYS",  "name": "Sprott Physical Gold Trust",            "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "FXAIX", "name": "Fidelity 500 Index Fund",               "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "FPADX", "name": "Fidelity Pacific Basin Fund",           "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null }
+        {
+          "symbol": "COPX",
+          "theme": "commodities",
+          "qty": 50.0,
+          "avgCost": 73.14,
+          "lastPrice": 88.03,
+          "totalValue": 4401.5
+        },
+        {
+          "symbol": "SGDM",
+          "theme": "commodities",
+          "qty": 88.0,
+          "avgCost": 49.09,
+          "lastPrice": 74.78,
+          "totalValue": 6580.64
+        },
+        {
+          "symbol": "QQQ",
+          "theme": "broad",
+          "qty": 4.0,
+          "avgCost": 718.43,
+          "lastPrice": 723.03,
+          "totalValue": 2892.12
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 184.5,
+          "lastPrice": 214.42,
+          "totalValue": 2144.2
+        },
+        {
+          "symbol": "SILJ",
+          "theme": "commodities",
+          "qty": 306.0,
+          "avgCost": 19.09,
+          "lastPrice": 29.14,
+          "totalValue": 8916.84
+        },
+        {
+          "symbol": "PLTR",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 127.2,
+          "lastPrice": 172.01,
+          "totalValue": 1720.1
+        },
+        {
+          "symbol": "VTI",
+          "theme": "broad",
+          "qty": 18.0,
+          "avgCost": 338.99,
+          "lastPrice": 381.78,
+          "totalValue": 6872.04
+        },
+        {
+          "symbol": "FENY",
+          "theme": "energy",
+          "qty": 152.0,
+          "avgCost": 33.01,
+          "lastPrice": 31.95,
+          "totalValue": 4856.4
+        },
+        {
+          "symbol": "PHYS",
+          "theme": "broad",
+          "qty": 141.0,
+          "avgCost": 33.29,
+          "lastPrice": 32.87,
+          "totalValue": 4634.67
+        },
+        {
+          "symbol": "NVDA",
+          "theme": "tech",
+          "qty": 23.067,
+          "avgCost": 204.91,
+          "lastPrice": 223.96,
+          "totalValue": 5166.09
+        },
+        {
+          "symbol": "AVGO",
+          "theme": "tech",
+          "qty": 9.0,
+          "avgCost": 388.87,
+          "lastPrice": 427.76,
+          "totalValue": 3849.84
+        },
+        {
+          "symbol": "TSLA",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 311.2,
+          "lastPrice": 328.58,
+          "totalValue": 4928.7
+        },
+        {
+          "symbol": "PANW",
+          "theme": "tech",
+          "qty": 8.0,
+          "avgCost": 161.84,
+          "lastPrice": 363.86,
+          "totalValue": 2910.88
+        },
+        {
+          "symbol": "VST",
+          "theme": "nuclear",
+          "qty": 18.0,
+          "avgCost": 159.77,
+          "lastPrice": 140.59,
+          "totalValue": 2530.62
+        },
+        {
+          "symbol": "TSM",
+          "theme": "tech",
+          "qty": 6.0,
+          "avgCost": 410.47,
+          "lastPrice": 420.04,
+          "totalValue": 2520.24
+        },
+        {
+          "symbol": "CEG",
+          "theme": "nuclear",
+          "qty": 7.0,
+          "avgCost": 294.38,
+          "lastPrice": 269.89,
+          "totalValue": 1889.23
+        },
+        {
+          "symbol": "NOW",
+          "theme": "tech",
+          "qty": 12.0,
+          "avgCost": 104.79,
+          "lastPrice": 124.88,
+          "totalValue": 1498.56
+        },
+        {
+          "symbol": "SRUUF",
+          "theme": "nuclear",
+          "qty": 74.0,
+          "avgCost": 14.55,
+          "lastPrice": 19.37,
+          "totalValue": 1433.38
+        },
+        {
+          "symbol": "MU",
+          "theme": "tech",
+          "qty": 4.0,
+          "avgCost": 847.3325,
+          "lastPrice": 877.57,
+          "totalValue": 3510.28
+        },
+        {
+          "symbol": "BX",
+          "theme": "energy",
+          "qty": 9.0,
+          "avgCost": 108.3978,
+          "lastPrice": 137.13,
+          "totalValue": 1234.17
+        },
+        {
+          "symbol": "UBER",
+          "theme": "tech",
+          "qty": 20.0,
+          "avgCost": 74.6252,
+          "lastPrice": 75.02,
+          "totalValue": 1500.4
+        }
       ]
     },
-    "hsa": {
-      "label": "Fidelity HSA",
+    "block_119": {
+      "label": "Brokerage sleeve (large legacy list)",
+      "category": "brokerage",
+      "sourceRow": 119,
+      "totalValue": 88279.59,
       "positions": [
-        { "symbol": "VTV",   "name": "Vanguard Value ETF",                    "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "SPYI",  "name": "NEOS S&P 500 High Income ETF",          "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "DBMF",  "name": "iMGP DBi Managed Futures Strategy ETF", "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "XAR",   "name": "SPDR S&P Aerospace & Defense ETF",      "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "INVH",  "name": "Invitation Homes",                      "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "APD",   "name": "Air Products & Chemicals",              "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null },
-        { "symbol": "BX",    "name": "Blackstone Inc",                        "theme": "broad",       "qty": null, "avgCost": null, "lastPrice": null, "totalValue": null }
+        {
+          "symbol": "VULNF",
+          "theme": "nuclear",
+          "qty": 121.0,
+          "avgCost": 8.12,
+          "lastPrice": 9.3,
+          "totalValue": 1125.3
+        },
+        {
+          "symbol": "AFMJF",
+          "theme": "nuclear",
+          "qty": 100.0,
+          "avgCost": 0.52,
+          "lastPrice": 0.7,
+          "totalValue": 70.0
+        },
+        {
+          "symbol": "AFMJF",
+          "theme": "nuclear",
+          "qty": 820.0,
+          "avgCost": 0.6,
+          "lastPrice": 0.7,
+          "totalValue": 574.0
+        },
+        {
+          "symbol": "GLATF",
+          "theme": "nuclear",
+          "qty": 225.0,
+          "avgCost": 1.87,
+          "lastPrice": 2.4,
+          "totalValue": 540.0
+        },
+        {
+          "symbol": "ANLDF",
+          "theme": "nuclear",
+          "qty": 3000.0,
+          "avgCost": 0.11,
+          "lastPrice": 0.11,
+          "totalValue": 330.0
+        },
+        {
+          "symbol": "BQSSF",
+          "theme": "nuclear",
+          "qty": 3283.0,
+          "avgCost": 0.14,
+          "lastPrice": 0.2,
+          "totalValue": 656.6
+        },
+        {
+          "symbol": "UWEFF",
+          "theme": "nuclear",
+          "qty": 1000.0,
+          "avgCost": 0.21,
+          "lastPrice": 0.29,
+          "totalValue": 293.4
+        },
+        {
+          "symbol": "CCJ",
+          "theme": "nuclear",
+          "qty": 16.0,
+          "avgCost": 16.48,
+          "lastPrice": 21.11,
+          "totalValue": 337.76
+        },
+        {
+          "symbol": "URG",
+          "theme": "nuclear",
+          "qty": 670.0,
+          "avgCost": 1.43,
+          "lastPrice": 1.6,
+          "totalValue": 1072.0
+        },
+        {
+          "symbol": "LTSRF",
+          "theme": "nuclear",
+          "qty": 1700.0,
+          "avgCost": 0.16,
+          "lastPrice": 0.24,
+          "totalValue": 408.0
+        },
+        {
+          "symbol": "VULNF",
+          "theme": "nuclear",
+          "qty": 200.0,
+          "avgCost": 10.73,
+          "lastPrice": 7.79,
+          "totalValue": 1558.0
+        },
+        {
+          "symbol": "AG",
+          "theme": "commodities",
+          "qty": 20.0,
+          "avgCost": 16.58,
+          "lastPrice": 12.53,
+          "totalValue": 250.6
+        },
+        {
+          "symbol": "PSLV",
+          "theme": "commodities",
+          "qty": 173.0,
+          "avgCost": 10.05,
+          "lastPrice": 7.85,
+          "totalValue": 1358.05
+        },
+        {
+          "symbol": "PSLV",
+          "theme": "commodities",
+          "qty": 152.0,
+          "avgCost": 8.75,
+          "lastPrice": 7.85,
+          "totalValue": 1193.75
+        },
+        {
+          "symbol": "SILJ",
+          "theme": "commodities",
+          "qty": 90.0,
+          "avgCost": 16.98,
+          "lastPrice": 12.8,
+          "totalValue": 1152.0
+        },
+        {
+          "symbol": "SILJ",
+          "theme": "commodities",
+          "qty": 41.0,
+          "avgCost": 13.64,
+          "lastPrice": 12.82,
+          "totalValue": 525.72
+        },
+        {
+          "symbol": "SILJ",
+          "theme": "commodities",
+          "qty": 20.0,
+          "avgCost": 15.53,
+          "lastPrice": 12.77,
+          "totalValue": 255.4
+        },
+        {
+          "symbol": "PAAS",
+          "theme": "commodities",
+          "qty": 5.0,
+          "avgCost": 32.14,
+          "lastPrice": 26.27,
+          "totalValue": 131.35
+        },
+        {
+          "symbol": "PENMF",
+          "theme": "nuclear",
+          "qty": 6074.0,
+          "avgCost": 0.23,
+          "lastPrice": 0.16,
+          "totalValue": 971.84
+        },
+        {
+          "symbol": "NKE",
+          "theme": "tech",
+          "qty": 1.0,
+          "avgCost": 142.99,
+          "lastPrice": 126.77,
+          "totalValue": 126.77
+        },
+        {
+          "symbol": "SNOW",
+          "theme": "tech",
+          "qty": 1.0,
+          "avgCost": 284.59,
+          "lastPrice": 214.44,
+          "totalValue": 214.44
+        },
+        {
+          "symbol": "PYPL",
+          "theme": "tech",
+          "qty": 1.0,
+          "avgCost": 246.29,
+          "lastPrice": 181.71,
+          "totalValue": 181.71
+        },
+        {
+          "symbol": "RSKD",
+          "theme": "tech",
+          "qty": 2.0,
+          "avgCost": 21.0,
+          "lastPrice": 8.32,
+          "totalValue": 16.64
+        },
+        {
+          "symbol": "AVDX",
+          "theme": "tech",
+          "qty": 20.0,
+          "avgCost": 24.14,
+          "lastPrice": 15.5,
+          "totalValue": 310.0
+        },
+        {
+          "symbol": "EMQQ",
+          "theme": "tech",
+          "qty": 4.0,
+          "avgCost": 73.06,
+          "lastPrice": 53.76,
+          "totalValue": 215.04
+        },
+        {
+          "symbol": "EMQQ",
+          "theme": "tech",
+          "qty": 2.0,
+          "avgCost": 73.06,
+          "lastPrice": 49.89,
+          "totalValue": 99.78
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 1.0,
+          "avgCost": 263.21,
+          "lastPrice": 167.71,
+          "totalValue": 167.71
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 2.0,
+          "avgCost": 252.18,
+          "lastPrice": 168.47,
+          "totalValue": 336.94
+        },
+        {
+          "symbol": "URNM",
+          "theme": "nuclear",
+          "qty": 19.0,
+          "avgCost": 74.31,
+          "lastPrice": 63.2,
+          "totalValue": 1200.73
+        },
+        {
+          "symbol": "URNM",
+          "theme": "nuclear",
+          "qty": 10.0,
+          "avgCost": 55.8,
+          "lastPrice": 66.12,
+          "totalValue": 661.2
+        },
+        {
+          "symbol": "LNG",
+          "theme": "energy",
+          "qty": 23.0,
+          "avgCost": 105.18,
+          "lastPrice": 173.98,
+          "totalValue": 4001.54
+        },
+        {
+          "symbol": "SQ",
+          "theme": "tech",
+          "qty": 1.0,
+          "avgCost": 237.37,
+          "lastPrice": 102.21,
+          "totalValue": 102.21
+        },
+        {
+          "symbol": "SE",
+          "theme": "tech",
+          "qty": 2.0,
+          "avgCost": 317.0,
+          "lastPrice": 94.53,
+          "totalValue": 189.07
+        },
+        {
+          "symbol": "BP",
+          "theme": "energy",
+          "qty": 5.0,
+          "avgCost": 29.94,
+          "lastPrice": 31.97,
+          "totalValue": 159.85
+        },
+        {
+          "symbol": "MMP",
+          "theme": "energy",
+          "qty": 2.0,
+          "avgCost": 43.39,
+          "lastPrice": 50.0,
+          "totalValue": 100.0
+        },
+        {
+          "symbol": "COPX",
+          "theme": "commodities",
+          "qty": 25.0,
+          "avgCost": 38.45,
+          "lastPrice": 31.45,
+          "totalValue": 786.25
+        },
+        {
+          "symbol": "FMCXF",
+          "theme": "nuclear",
+          "qty": 130.0,
+          "avgCost": 1.79,
+          "lastPrice": 1.93,
+          "totalValue": 250.9
+        },
+        {
+          "symbol": "URG",
+          "theme": "nuclear",
+          "qty": 1751.0,
+          "avgCost": 1.67,
+          "lastPrice": 1.27,
+          "totalValue": 2230.6
+        },
+        {
+          "symbol": "WSTRF",
+          "theme": "nuclear",
+          "qty": 327.0,
+          "avgCost": 1.99,
+          "lastPrice": 1.03,
+          "totalValue": 336.32
+        },
+        {
+          "symbol": "DNN",
+          "theme": "nuclear",
+          "qty": 568.0,
+          "avgCost": 1.15,
+          "lastPrice": 1.24,
+          "totalValue": 704.32
+        },
+        {
+          "symbol": "DNN",
+          "theme": "nuclear",
+          "qty": 300.0,
+          "avgCost": 1.79,
+          "lastPrice": 1.23,
+          "totalValue": 369.0
+        },
+        {
+          "symbol": "DIS",
+          "theme": "tech",
+          "qty": 1.0,
+          "avgCost": 170.77,
+          "lastPrice": 107.0,
+          "totalValue": 107.0
+        },
+        {
+          "symbol": "PSLV",
+          "theme": "commodities",
+          "qty": 370.0,
+          "avgCost": 8.09,
+          "lastPrice": 6.62,
+          "totalValue": 2450.4
+        },
+        {
+          "symbol": "BX",
+          "theme": "energy",
+          "qty": 8.049,
+          "avgCost": 101.44,
+          "lastPrice": 8.4,
+          "totalValue": 67.58
+        },
+        {
+          "symbol": "KKR",
+          "theme": "broad",
+          "qty": 12.047,
+          "avgCost": 57.67,
+          "lastPrice": 50.78,
+          "totalValue": 611.75
+        },
+        {
+          "symbol": "SEV",
+          "theme": "tech",
+          "qty": 18.0,
+          "avgCost": 15.0,
+          "lastPrice": 1.35,
+          "totalValue": 24.3
+        },
+        {
+          "symbol": "CG",
+          "theme": "broad",
+          "qty": 3.0,
+          "avgCost": 50.25,
+          "lastPrice": 31.13,
+          "totalValue": 93.39
+        },
+        {
+          "symbol": "NU",
+          "theme": "tech",
+          "qty": 35.0,
+          "avgCost": 9.0,
+          "lastPrice": 4.17,
+          "totalValue": 145.95
+        },
+        {
+          "symbol": "LIT",
+          "theme": "commodities",
+          "qty": 11.0,
+          "avgCost": 86.03,
+          "lastPrice": 67.83,
+          "totalValue": 746.15
+        },
+        {
+          "symbol": "VT",
+          "theme": "broad",
+          "qty": 8.0,
+          "avgCost": 90.24,
+          "lastPrice": 80.82,
+          "totalValue": 300.52
+        },
+        {
+          "symbol": "VWO",
+          "theme": "broad",
+          "qty": 10.0,
+          "avgCost": 49.25,
+          "lastPrice": 37.57,
+          "totalValue": 808.23
+        },
+        {
+          "symbol": "FOSYF",
+          "theme": "other",
+          "qty": 950.0,
+          "avgCost": 0.69,
+          "lastPrice": 0.36,
+          "totalValue": 340.86
+        },
+        {
+          "symbol": "WSTRF",
+          "theme": "nuclear",
+          "qty": 345.0,
+          "avgCost": 1.6,
+          "lastPrice": 0.78,
+          "totalValue": 270.55
+        },
+        {
+          "symbol": "URG",
+          "theme": "nuclear",
+          "qty": 900.0,
+          "avgCost": 1.53,
+          "lastPrice": 1.3,
+          "totalValue": 1170.9
+        },
+        {
+          "symbol": "FCUUF",
+          "theme": "nuclear",
+          "qty": 800.0,
+          "avgCost": 0.8,
+          "lastPrice": 0.36,
+          "totalValue": 284.8
+        },
+        {
+          "symbol": "DBA",
+          "theme": "broad",
+          "qty": 21.0,
+          "avgCost": 18.86,
+          "lastPrice": 20.41,
+          "totalValue": 428.61
+        },
+        {
+          "symbol": "PHYS",
+          "theme": "broad",
+          "qty": 60.0,
+          "avgCost": 13.78,
+          "lastPrice": 15.0,
+          "totalValue": 900.0
+        },
+        {
+          "symbol": "SCHD",
+          "theme": "broad",
+          "qty": 13.0,
+          "avgCost": 70.55,
+          "lastPrice": 73.54,
+          "totalValue": 956.02
+        },
+        {
+          "symbol": "UEC",
+          "theme": "nuclear",
+          "qty": 80.0,
+          "avgCost": 3.01,
+          "lastPrice": 4.07,
+          "totalValue": 325.6
+        },
+        {
+          "symbol": "SGDJ",
+          "theme": "commodities",
+          "qty": 7.0,
+          "avgCost": 48.88,
+          "lastPrice": 27.25,
+          "totalValue": 190.75
+        },
+        {
+          "symbol": "SBSW",
+          "theme": "commodities",
+          "qty": 50.0,
+          "avgCost": 11.0,
+          "lastPrice": 5.11,
+          "totalValue": 255.5
+        },
+        {
+          "symbol": "STTDF",
+          "theme": "nuclear",
+          "qty": 888.0,
+          "avgCost": 0.15,
+          "lastPrice": 0.03,
+          "totalValue": 26.64
+        },
+        {
+          "symbol": "URNJ",
+          "theme": "nuclear",
+          "qty": 118.4282,
+          "avgCost": 13.8,
+          "lastPrice": 28.02,
+          "totalValue": 3318.36
+        },
+        {
+          "symbol": "DVN",
+          "theme": "energy",
+          "qty": 11.398,
+          "avgCost": 39.84,
+          "lastPrice": 42.98,
+          "totalValue": 489.89
+        },
+        {
+          "symbol": "SRUUF",
+          "theme": "nuclear",
+          "qty": 91.0,
+          "avgCost": 11.67,
+          "lastPrice": 22.37,
+          "totalValue": 2035.67
+        },
+        {
+          "symbol": "UEC",
+          "theme": "nuclear",
+          "qty": 200.0,
+          "avgCost": 8.03,
+          "lastPrice": 7.13,
+          "totalValue": 1426.0
+        },
+        {
+          "symbol": "URNJ",
+          "theme": "nuclear",
+          "qty": 35.0,
+          "avgCost": 24.54,
+          "lastPrice": 28.13,
+          "totalValue": 984.55
+        },
+        {
+          "symbol": "DLR",
+          "theme": "broad",
+          "qty": 10.0,
+          "avgCost": 140.0,
+          "lastPrice": 143.83,
+          "totalValue": 1438.3
+        },
+        {
+          "symbol": "SRUUF",
+          "theme": "nuclear",
+          "qty": 50.0,
+          "avgCost": 23.73,
+          "lastPrice": 20.6,
+          "totalValue": 1030.0
+        },
+        {
+          "symbol": "JEPI",
+          "theme": "broad",
+          "qty": 35.0,
+          "avgCost": 55.0,
+          "lastPrice": 56.06,
+          "totalValue": 1962.17
+        },
+        {
+          "symbol": "SRUUF",
+          "theme": "nuclear",
+          "qty": 76.0,
+          "avgCost": 23.73,
+          "lastPrice": 18.93,
+          "totalValue": 1438.68
+        },
+        {
+          "symbol": "NVDA",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 93.8,
+          "lastPrice": 129.3,
+          "totalValue": 1293.0
+        },
+        {
+          "symbol": "DNN",
+          "theme": "nuclear",
+          "qty": 500.0,
+          "avgCost": 1.16,
+          "lastPrice": 2.24,
+          "totalValue": 1117.5
+        },
+        {
+          "symbol": "NXE",
+          "theme": "nuclear",
+          "qty": 100.0,
+          "avgCost": 4.28,
+          "lastPrice": 7.46,
+          "totalValue": 746.32
+        },
+        {
+          "symbol": "UUUU",
+          "theme": "nuclear",
+          "qty": 112.0,
+          "avgCost": 6.07,
+          "lastPrice": 6.62,
+          "totalValue": 740.88
+        },
+        {
+          "symbol": "URNM",
+          "theme": "nuclear",
+          "qty": 4.0,
+          "avgCost": 28.71,
+          "lastPrice": 46.79,
+          "totalValue": 187.16
+        },
+        {
+          "symbol": "DNN",
+          "theme": "nuclear",
+          "qty": 51.0,
+          "avgCost": 1.38,
+          "lastPrice": 1.96,
+          "totalValue": 99.96
+        },
+        {
+          "symbol": "CEF",
+          "theme": "commodities",
+          "qty": 14.0,
+          "avgCost": 17.94,
+          "lastPrice": 22.47,
+          "totalValue": 314.58
+        },
+        {
+          "symbol": "URG",
+          "theme": "nuclear",
+          "qty": 100.0,
+          "avgCost": 1.71,
+          "lastPrice": 1.35,
+          "totalValue": 135.0
+        },
+        {
+          "symbol": "PSLV",
+          "theme": "commodities",
+          "qty": 12.0,
+          "avgCost": 6.31,
+          "lastPrice": 9.98,
+          "totalValue": 119.76
+        },
+        {
+          "symbol": "PBD",
+          "theme": "energy",
+          "qty": 4.0,
+          "avgCost": 30.01,
+          "lastPrice": 13.95,
+          "totalValue": 55.8
+        },
+        {
+          "symbol": "YOU",
+          "theme": "tech",
+          "qty": 1.0,
+          "avgCost": 45.1,
+          "lastPrice": 20.2,
+          "totalValue": 20.2
+        },
+        {
+          "symbol": "SIRI",
+          "theme": "tech",
+          "qty": 1.0,
+          "avgCost": 0.0,
+          "lastPrice": 3.42,
+          "totalValue": 3.42
+        },
+        {
+          "symbol": "UUUU",
+          "theme": "nuclear",
+          "qty": 20.0,
+          "avgCost": 6.67,
+          "lastPrice": 5.65,
+          "totalValue": 113.0
+        },
+        {
+          "symbol": "CYBR",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 221.64,
+          "lastPrice": 275.0,
+          "totalValue": 4125.0
+        },
+        {
+          "symbol": "SNOW",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 185.91,
+          "lastPrice": 229.82,
+          "totalValue": 3447.3
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 260.565,
+          "lastPrice": 289.52,
+          "totalValue": 2895.2
+        },
+        {
+          "symbol": "AMD",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 158.06,
+          "lastPrice": 174.95,
+          "totalValue": 2624.25
+        },
+        {
+          "symbol": "NVDA",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 480.485,
+          "lastPrice": 559.67,
+          "totalValue": 2798.35
+        },
+        {
+          "symbol": "NVDA",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 571.6,
+          "lastPrice": 714.99,
+          "totalValue": 3574.97
+        },
+        {
+          "symbol": "ESTC",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 108.89,
+          "lastPrice": 120.13,
+          "totalValue": 1201.3
+        },
+        {
+          "symbol": "MSFT",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 415.48,
+          "lastPrice": 399.6,
+          "totalValue": 1998.0
+        },
+        {
+          "symbol": "DDOG",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 123.52,
+          "lastPrice": 125.01,
+          "totalValue": 1250.1
+        },
+        {
+          "symbol": "ESTC",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 108.89,
+          "lastPrice": 131.03,
+          "totalValue": 655.15
+        },
+        {
+          "symbol": "AMD",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 177.43,
+          "lastPrice": 209.14,
+          "totalValue": 1045.7
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 3.0,
+          "avgCost": 292.7,
+          "lastPrice": 324.0,
+          "totalValue": 972.0
+        },
+        {
+          "symbol": "ESTC",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 108.0,
+          "lastPrice": 96.05,
+          "totalValue": 960.48
+        },
+        {
+          "symbol": "ZS",
+          "theme": "tech",
+          "qty": 7.0,
+          "avgCost": 230.27,
+          "lastPrice": 167.58,
+          "totalValue": 1173.06
+        },
+        {
+          "symbol": "DDOG",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 123.52,
+          "lastPrice": 124.23,
+          "totalValue": 621.16
+        },
+        {
+          "symbol": "TEAM",
+          "theme": "tech",
+          "qty": 4.0,
+          "avgCost": 209.75,
+          "lastPrice": 199.97,
+          "totalValue": 799.88
+        },
+        {
+          "symbol": "AAPL",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 187.72,
+          "lastPrice": 200.0,
+          "totalValue": 2000.0
+        },
+        {
+          "symbol": "URNM",
+          "theme": "nuclear",
+          "qty": 20.0,
+          "avgCost": 52.04,
+          "lastPrice": 49.86,
+          "totalValue": 997.2
+        }
+      ]
+    },
+    "block_225": {
+      "label": "Main brokerage",
+      "category": "brokerage",
+      "sourceRow": 225,
+      "totalValue": 201641.36,
+      "positions": [
+        {
+          "symbol": "PHYS",
+          "theme": "broad",
+          "qty": 435.0,
+          "avgCost": 25.74,
+          "lastPrice": 32.87,
+          "totalValue": 14298.45
+        },
+        {
+          "symbol": "URNM",
+          "theme": "nuclear",
+          "qty": 222.457,
+          "avgCost": 45.87,
+          "lastPrice": 54.53,
+          "totalValue": 12130.58
+        },
+        {
+          "symbol": "LNG",
+          "theme": "energy",
+          "qty": 21.0,
+          "avgCost": 285.31,
+          "lastPrice": 256.14,
+          "totalValue": 5378.94
+        },
+        {
+          "symbol": "SRUUF",
+          "theme": "nuclear",
+          "qty": 519.0,
+          "avgCost": 14.39,
+          "lastPrice": 19.37,
+          "totalValue": 10053.03
+        },
+        {
+          "symbol": "SLVR",
+          "theme": "commodities",
+          "qty": 208.0,
+          "avgCost": 61.62,
+          "lastPrice": 57.94,
+          "totalValue": 12051.52
+        },
+        {
+          "symbol": "URNJ",
+          "theme": "nuclear",
+          "qty": 465.547,
+          "avgCost": 20.33,
+          "lastPrice": 24.31,
+          "totalValue": 11317.45
+        },
+        {
+          "symbol": "AVGO",
+          "theme": "tech",
+          "qty": 22.024,
+          "avgCost": 391.48,
+          "lastPrice": 427.76,
+          "totalValue": 9420.99
+        },
+        {
+          "symbol": "FENY",
+          "theme": "energy",
+          "qty": 374.862,
+          "avgCost": 30.59,
+          "lastPrice": 31.95,
+          "totalValue": 11976.84
+        },
+        {
+          "symbol": "SILJ",
+          "theme": "commodities",
+          "qty": 272.505,
+          "avgCost": 13.53,
+          "lastPrice": 29.14,
+          "totalValue": 7940.8
+        },
+        {
+          "symbol": "COPP",
+          "theme": "commodities",
+          "qty": 80.0,
+          "avgCost": 39.95,
+          "lastPrice": 42.82,
+          "totalValue": 3425.6
+        },
+        {
+          "symbol": "NVDA",
+          "theme": "tech",
+          "qty": 40.026,
+          "avgCost": 122.1,
+          "lastPrice": 223.96,
+          "totalValue": 8964.22
+        },
+        {
+          "symbol": "PANW",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 154.49,
+          "lastPrice": 363.86,
+          "totalValue": 1819.3
+        },
+        {
+          "symbol": "GEV",
+          "theme": "energy",
+          "qty": 5.002,
+          "avgCost": 997.08,
+          "lastPrice": 990.32,
+          "totalValue": 4953.58
+        },
+        {
+          "symbol": "EQT",
+          "theme": "energy",
+          "qty": 75.255,
+          "avgCost": 60.58,
+          "lastPrice": 51.69,
+          "totalValue": 3889.93
+        },
+        {
+          "symbol": "MRVL",
+          "theme": "tech",
+          "qty": 27.006,
+          "avgCost": 263.29,
+          "lastPrice": 218.72,
+          "totalValue": 5906.75
+        },
+        {
+          "symbol": "BX",
+          "theme": "energy",
+          "qty": 27.044,
+          "avgCost": 90.42,
+          "lastPrice": 137.13,
+          "totalValue": 3708.54
+        },
+        {
+          "symbol": "PWR",
+          "theme": "energy",
+          "qty": 6.001,
+          "avgCost": 591.49,
+          "lastPrice": 671.86,
+          "totalValue": 4031.83
+        },
+        {
+          "symbol": "NBIS",
+          "theme": "tech",
+          "qty": 29.0,
+          "avgCost": 229.56,
+          "lastPrice": 187.97,
+          "totalValue": 5451.13
+        },
+        {
+          "symbol": "LITP",
+          "theme": "commodities",
+          "qty": 520.461,
+          "avgCost": 13.52,
+          "lastPrice": 11.19,
+          "totalValue": 5823.96
+        },
+        {
+          "symbol": "TSLA",
+          "theme": "tech",
+          "qty": 16.0,
+          "avgCost": 270.21,
+          "lastPrice": 328.58,
+          "totalValue": 5257.28
+        },
+        {
+          "symbol": "NXE",
+          "theme": "nuclear",
+          "qty": 395.0,
+          "avgCost": 7.98,
+          "lastPrice": 10.43,
+          "totalValue": 4119.85
+        },
+        {
+          "symbol": "VST",
+          "theme": "nuclear",
+          "qty": 45.056,
+          "avgCost": 156.52,
+          "lastPrice": 140.59,
+          "totalValue": 6334.42
+        },
+        {
+          "symbol": "UUUU",
+          "theme": "nuclear",
+          "qty": 250.0,
+          "avgCost": 10.03,
+          "lastPrice": 14.14,
+          "totalValue": 3535.0
+        },
+        {
+          "symbol": "CEG",
+          "theme": "nuclear",
+          "qty": 29.245,
+          "avgCost": 248.81,
+          "lastPrice": 269.89,
+          "totalValue": 7892.93
+        },
+        {
+          "symbol": "MCHI",
+          "theme": "tech",
+          "qty": 41.064,
+          "avgCost": 56.34,
+          "lastPrice": 56.57,
+          "totalValue": 2322.99
+        },
+        {
+          "symbol": "SGDM",
+          "theme": "commodities",
+          "qty": 35.358,
+          "avgCost": 63.35,
+          "lastPrice": 74.78,
+          "totalValue": 2644.07
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 17.0,
+          "avgCost": 184.81,
+          "lastPrice": 214.42,
+          "totalValue": 3645.14
+        },
+        {
+          "symbol": "BWXT",
+          "theme": "nuclear",
+          "qty": 15.163,
+          "avgCost": 132.2,
+          "lastPrice": 169.9,
+          "totalValue": 2576.19
+        },
+        {
+          "symbol": "UEC",
+          "theme": "nuclear",
+          "qty": 158.477,
+          "avgCost": 12.62,
+          "lastPrice": 11.26,
+          "totalValue": 1784.45
+        },
+        {
+          "symbol": "ASPI",
+          "theme": "nuclear",
+          "qty": 362.0,
+          "avgCost": 5.03,
+          "lastPrice": 4.43,
+          "totalValue": 1603.66
+        },
+        {
+          "symbol": "FHLC",
+          "theme": "broad",
+          "qty": 25.281,
+          "avgCost": 70.55,
+          "lastPrice": 80.67,
+          "totalValue": 2039.42
+        },
+        {
+          "symbol": "SPCX",
+          "theme": "tech",
+          "qty": 2.0,
+          "avgCost": 160.0,
+          "lastPrice": 133.11,
+          "totalValue": 266.22
+        },
+        {
+          "symbol": "MU",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 867.61,
+          "lastPrice": 877.57,
+          "totalValue": 8775.7
+        },
+        {
+          "symbol": "TSM",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 402.07,
+          "lastPrice": 420.04,
+          "totalValue": 6300.6
+        }
+      ]
+    },
+    "block_438": {
+      "label": "Sleeve at row 438",
+      "category": "unknown",
+      "sourceRow": 438,
+      "totalValue": 8265.37,
+      "positions": [
+        {
+          "symbol": "SGDM",
+          "theme": "commodities",
+          "qty": 44.0,
+          "avgCost": 34.07,
+          "lastPrice": 74.78,
+          "totalValue": 3290.32
+        },
+        {
+          "symbol": "COPP",
+          "theme": "commodities",
+          "qty": 51.0,
+          "avgCost": 39.08,
+          "lastPrice": 42.82,
+          "totalValue": 2183.82
+        },
+        {
+          "symbol": "PHYS",
+          "theme": "broad",
+          "qty": 39.0,
+          "avgCost": 25.42,
+          "lastPrice": 32.87,
+          "totalValue": 1281.93
+        },
+        {
+          "symbol": "LITP",
+          "theme": "commodities",
+          "qty": 66.0,
+          "avgCost": 15.04,
+          "lastPrice": 11.19,
+          "totalValue": 738.54
+        },
+        {
+          "symbol": "COPP",
+          "theme": "commodities",
+          "qty": 18.0,
+          "avgCost": 41.93,
+          "lastPrice": 42.82,
+          "totalValue": 770.76
+        }
+      ]
+    },
+    "block_480": {
+      "label": "Sleeve at row 480",
+      "category": "unknown",
+      "sourceRow": 480,
+      "totalValue": 17174.53,
+      "positions": [
+        {
+          "symbol": "SGDM",
+          "theme": "commodities",
+          "qty": 67.0,
+          "avgCost": 43.51,
+          "lastPrice": 74.78,
+          "totalValue": 5010.26
+        },
+        {
+          "symbol": "PHYS",
+          "theme": "broad",
+          "qty": 149.0,
+          "avgCost": 28.58,
+          "lastPrice": 32.87,
+          "totalValue": 4897.63
+        },
+        {
+          "symbol": "SLV",
+          "theme": "commodities",
+          "qty": 17.0,
+          "avgCost": 45.79,
+          "lastPrice": 57.5,
+          "totalValue": 977.5
+        },
+        {
+          "symbol": "SLVR",
+          "theme": "commodities",
+          "qty": 15.0,
+          "avgCost": 64.74,
+          "lastPrice": 57.94,
+          "totalValue": 869.1
+        },
+        {
+          "symbol": "SILJ",
+          "theme": "commodities",
+          "qty": 186.0,
+          "avgCost": 12.73,
+          "lastPrice": 29.14,
+          "totalValue": 5420.04
+        }
+      ]
+    },
+    "block_513": {
+      "label": "Sleeve at row 513",
+      "category": "unknown",
+      "sourceRow": 513,
+      "totalValue": 5870.2,
+      "positions": [
+        {
+          "symbol": "URNJ",
+          "theme": "nuclear",
+          "qty": 104.0,
+          "avgCost": 23.43,
+          "lastPrice": 24.31,
+          "totalValue": 2528.24
+        },
+        {
+          "symbol": "CEG",
+          "theme": "nuclear",
+          "qty": 5.0,
+          "avgCost": 300.29,
+          "lastPrice": 269.89,
+          "totalValue": 1349.45
+        },
+        {
+          "symbol": "SRUUF",
+          "theme": "nuclear",
+          "qty": 74.0,
+          "avgCost": 14.55,
+          "lastPrice": 19.37,
+          "totalValue": 1433.38
+        },
+        {
+          "symbol": "URNJ",
+          "theme": "nuclear",
+          "qty": 23.0,
+          "avgCost": 21.3,
+          "lastPrice": 24.31,
+          "totalValue": 559.13
+        }
+      ]
+    },
+    "block_558": {
+      "label": "Sleeve at row 558",
+      "category": "unknown",
+      "sourceRow": 558,
+      "totalValue": 15729.52,
+      "positions": [
+        {
+          "symbol": "TSLA",
+          "theme": "tech",
+          "qty": 9.0,
+          "avgCost": 437.0,
+          "lastPrice": 328.58,
+          "totalValue": 2957.22
+        },
+        {
+          "symbol": "PANW",
+          "theme": "tech",
+          "qty": 23.0,
+          "avgCost": 174.0,
+          "lastPrice": 363.86,
+          "totalValue": 8368.78
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 467.0,
+          "lastPrice": 214.42,
+          "totalValue": 1072.1
+        },
+        {
+          "symbol": "ZS",
+          "theme": "tech",
+          "qty": 11.0,
+          "avgCost": 170.65,
+          "lastPrice": 168.68,
+          "totalValue": 1855.48
+        },
+        {
+          "symbol": "LMT",
+          "theme": "broad",
+          "qty": 2.0,
+          "avgCost": 458.0,
+          "lastPrice": 587.95,
+          "totalValue": 1175.9
+        },
+        {
+          "symbol": "CG",
+          "theme": "broad",
+          "qty": 3.0,
+          "avgCost": 50.25,
+          "lastPrice": 47.79,
+          "totalValue": 143.37
+        },
+        {
+          "symbol": "AAPL",
+          "theme": "tech",
+          "qty": 0.5,
+          "avgCost": 124.54,
+          "lastPrice": 313.33,
+          "totalValue": 156.67
+        }
+      ]
+    },
+    "block_606": {
+      "label": "Sleeve at row 606",
+      "category": "unknown",
+      "sourceRow": 606,
+      "totalValue": 50079.41,
+      "positions": [
+        {
+          "symbol": "CYBR",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 221.64,
+          "lastPrice": 275.0,
+          "totalValue": 4125.0
+        },
+        {
+          "symbol": "SNOW",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 185.91,
+          "lastPrice": 229.82,
+          "totalValue": 3447.3
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 260.565,
+          "lastPrice": 289.52,
+          "totalValue": 2895.2
+        },
+        {
+          "symbol": "AMD",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 158.06,
+          "lastPrice": 174.95,
+          "totalValue": 2624.25
+        },
+        {
+          "symbol": "NVDA",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 480.485,
+          "lastPrice": 559.67,
+          "totalValue": 2798.35
+        },
+        {
+          "symbol": "NVDA",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 571.6,
+          "lastPrice": 714.99,
+          "totalValue": 3574.97
+        },
+        {
+          "symbol": "ESTC",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 108.89,
+          "lastPrice": 120.13,
+          "totalValue": 1201.3
+        },
+        {
+          "symbol": "MSFT",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 415.48,
+          "lastPrice": 399.6,
+          "totalValue": 1998.0
+        },
+        {
+          "symbol": "DDOG",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 123.52,
+          "lastPrice": 125.01,
+          "totalValue": 1250.1
+        },
+        {
+          "symbol": "ESTC",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 108.89,
+          "lastPrice": 131.03,
+          "totalValue": 655.15
+        },
+        {
+          "symbol": "AMD",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 177.43,
+          "lastPrice": 209.14,
+          "totalValue": 1045.7
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 3.0,
+          "avgCost": 292.7,
+          "lastPrice": 324.0,
+          "totalValue": 972.0
+        },
+        {
+          "symbol": "ESTC",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 108.0,
+          "lastPrice": 96.05,
+          "totalValue": 960.48
+        },
+        {
+          "symbol": "ZS",
+          "theme": "tech",
+          "qty": 7.0,
+          "avgCost": 230.27,
+          "lastPrice": 167.58,
+          "totalValue": 1173.06
+        },
+        {
+          "symbol": "DDOG",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 123.52,
+          "lastPrice": 124.23,
+          "totalValue": 621.16
+        },
+        {
+          "symbol": "TEAM",
+          "theme": "tech",
+          "qty": 4.0,
+          "avgCost": 209.75,
+          "lastPrice": 199.97,
+          "totalValue": 799.88
+        },
+        {
+          "symbol": "AAPL",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 187.72,
+          "lastPrice": 200.0,
+          "totalValue": 2000.0
+        },
+        {
+          "symbol": "URNM",
+          "theme": "nuclear",
+          "qty": 20.0,
+          "avgCost": 52.04,
+          "lastPrice": 49.86,
+          "totalValue": null
+        },
+        {
+          "symbol": "UUUU",
+          "theme": "nuclear",
+          "qty": 13.0,
+          "avgCost": 7.46,
+          "lastPrice": 5.31,
+          "totalValue": 69.03
+        },
+        {
+          "symbol": "DDOG",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 123.52,
+          "lastPrice": 130.69,
+          "totalValue": 1306.9
+        },
+        {
+          "symbol": "NOW",
+          "theme": "tech",
+          "qty": 4.0,
+          "avgCost": 682.57,
+          "lastPrice": 725.0,
+          "totalValue": 2900.0
+        },
+        {
+          "symbol": "ZS",
+          "theme": "tech",
+          "qty": 6.0,
+          "avgCost": 139.74,
+          "lastPrice": 174.62,
+          "totalValue": 1047.72
+        },
+        {
+          "symbol": "AMD",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 177.43,
+          "lastPrice": 152.64,
+          "totalValue": 1526.4
+        },
+        {
+          "symbol": "CYBR",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 271.0,
+          "lastPrice": 236.17,
+          "totalValue": 1180.85
+        },
+        {
+          "symbol": "MDB",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 396.86,
+          "lastPrice": 360.77,
+          "totalValue": 1803.85
+        },
+        {
+          "symbol": "TEAM",
+          "theme": "tech",
+          "qty": 4.0,
+          "avgCost": 209.62,
+          "lastPrice": 182.04,
+          "totalValue": 728.16
+        },
+        {
+          "symbol": "PANW",
+          "theme": "tech",
+          "qty": 21.0,
+          "avgCost": 285.0,
+          "lastPrice": 302.6,
+          "totalValue": 6354.6
+        },
+        {
+          "symbol": "MNDY",
+          "theme": "tech",
+          "qty": 5.0,
+          "avgCost": 211.3,
+          "lastPrice": 204.0,
+          "totalValue": 1020.0
+        }
+      ]
+    },
+    "block_639": {
+      "label": "Sleeve at row 639",
+      "category": "unknown",
+      "sourceRow": 639,
+      "totalValue": 1125.24,
+      "positions": [
+        {
+          "symbol": "BYND",
+          "theme": "tech",
+          "qty": 1.0,
+          "avgCost": 124.65,
+          "lastPrice": 0.54,
+          "totalValue": 0.54
+        },
+        {
+          "symbol": "BABA",
+          "theme": "tech",
+          "qty": 15.0,
+          "avgCost": 74.98,
+          "lastPrice": 74.98,
+          "totalValue": 1124.7
+        }
+      ]
+    },
+    "block_672": {
+      "label": "401k",
+      "category": "retirement",
+      "sourceRow": 672,
+      "totalValue": 99687.8,
+      "positions": [
+        {
+          "symbol": "VIVIX",
+          "theme": "broad",
+          "qty": 169.53,
+          "avgCost": 64.39,
+          "lastPrice": 87.53,
+          "totalValue": 14838.96
+        },
+        {
+          "symbol": "FSMAX",
+          "theme": "broad",
+          "qty": 26.231,
+          "avgCost": 67.44,
+          "lastPrice": 119.57,
+          "totalValue": 3136.44
+        },
+        {
+          "symbol": "FXAIX",
+          "theme": "broad",
+          "qty": 57.536,
+          "avgCost": 204.0,
+          "lastPrice": 269.71,
+          "totalValue": 15518.03
+        },
+        {
+          "symbol": "JLGMX",
+          "theme": "broad",
+          "qty": 28.199,
+          "avgCost": 87.52,
+          "lastPrice": 89.47,
+          "totalValue": 2522.96
+        },
+        {
+          "symbol": "FTIHX",
+          "theme": "broad",
+          "qty": 1246.0,
+          "avgCost": 13.64,
+          "lastPrice": 20.1,
+          "totalValue": 25044.6
+        },
+        {
+          "symbol": "VFFVX",
+          "theme": "broad",
+          "qty": 303.97,
+          "avgCost": 76.78,
+          "lastPrice": 105.0,
+          "totalValue": 31916.85
+        },
+        {
+          "symbol": "DBMF",
+          "theme": "broad",
+          "qty": 20.0,
+          "avgCost": 30.97,
+          "lastPrice": 30.93,
+          "totalValue": 618.6
+        },
+        {
+          "symbol": "VFIFX",
+          "theme": "broad",
+          "qty": 77.597,
+          "avgCost": 49.02,
+          "lastPrice": 78.5,
+          "totalValue": 6091.36
+        }
+      ]
+    },
+    "block_685": {
+      "label": "Retirement sleeve (COPX/DBMF/FENY/FSPSX/XAR)",
+      "category": "retirement",
+      "sourceRow": 685,
+      "totalValue": 30253.92,
+      "positions": [
+        {
+          "symbol": "SILJ",
+          "theme": "commodities",
+          "qty": 116.591,
+          "avgCost": 12.62,
+          "lastPrice": 29.14,
+          "totalValue": 3397.46
+        },
+        {
+          "symbol": "PHYS",
+          "theme": "broad",
+          "qty": 120.0,
+          "avgCost": 26.98,
+          "lastPrice": 32.87,
+          "totalValue": 3944.4
+        },
+        {
+          "symbol": "URNJ",
+          "theme": "nuclear",
+          "qty": 127.779,
+          "avgCost": 18.1,
+          "lastPrice": 24.31,
+          "totalValue": 3106.31
+        },
+        {
+          "symbol": "VTI",
+          "theme": "broad",
+          "qty": 16.173,
+          "avgCost": 321.58,
+          "lastPrice": 381.78,
+          "totalValue": 6174.53
+        },
+        {
+          "symbol": "COPX",
+          "theme": "commodities",
+          "qty": 15.0,
+          "avgCost": 82.74,
+          "lastPrice": 88.03,
+          "totalValue": 1320.45
+        },
+        {
+          "symbol": "SRUUF",
+          "theme": "nuclear",
+          "qty": 76.0,
+          "avgCost": 14.89,
+          "lastPrice": 19.37,
+          "totalValue": 1472.12
+        },
+        {
+          "symbol": "PSLV",
+          "theme": "commodities",
+          "qty": 80.0,
+          "avgCost": 19.72,
+          "lastPrice": 20.82,
+          "totalValue": 1665.6
+        },
+        {
+          "symbol": "FENY",
+          "theme": "energy",
+          "qty": 66.556,
+          "avgCost": 32.54,
+          "lastPrice": 31.95,
+          "totalValue": 2126.46
+        },
+        {
+          "symbol": "FSPSX",
+          "theme": "broad",
+          "qty": 24.255,
+          "avgCost": 57.64,
+          "lastPrice": 69.82,
+          "totalValue": 1693.48
+        },
+        {
+          "symbol": "XAR",
+          "theme": "broad",
+          "qty": 10.002,
+          "avgCost": 270.8373,
+          "lastPrice": 286.83,
+          "totalValue": 2868.87
+        },
+        {
+          "symbol": "DBMF",
+          "theme": "broad",
+          "qty": 80.318,
+          "avgCost": 30.214,
+          "lastPrice": 30.93,
+          "totalValue": 2484.24
+        }
+      ]
+    },
+    "block_744": {
+      "label": "Sleeve at row 744",
+      "category": "unknown",
+      "sourceRow": 744,
+      "totalValue": 35267.04,
+      "positions": [
+        {
+          "symbol": "OKLO",
+          "theme": "nuclear",
+          "qty": 52.0,
+          "avgCost": 32.97,
+          "lastPrice": 114.0,
+          "totalValue": 5928.0
+        },
+        {
+          "symbol": "OKLO",
+          "theme": "nuclear",
+          "qty": 38.0,
+          "avgCost": 92.97,
+          "lastPrice": 129.0,
+          "totalValue": 4902.0
+        },
+        {
+          "symbol": "ETHA",
+          "theme": "broad",
+          "qty": 10.0,
+          "avgCost": 16.9,
+          "lastPrice": 26.84,
+          "totalValue": 268.4
+        },
+        {
+          "symbol": "IBIT",
+          "theme": "broad",
+          "qty": 10.0,
+          "avgCost": 49.09,
+          "lastPrice": 59.77,
+          "totalValue": 597.66
+        },
+        {
+          "symbol": "OKLO",
+          "theme": "nuclear",
+          "qty": 50.0,
+          "avgCost": 17.0,
+          "lastPrice": 71.0,
+          "totalValue": 3550.0
+        },
+        {
+          "symbol": "PSLV",
+          "theme": "commodities",
+          "qty": 90.0,
+          "avgCost": 10.99,
+          "lastPrice": 35.0,
+          "totalValue": 3150.0
+        },
+        {
+          "symbol": "SLV",
+          "theme": "commodities",
+          "qty": 20.0,
+          "avgCost": 45.51,
+          "lastPrice": 102.86,
+          "totalValue": 2057.2
+        },
+        {
+          "symbol": "SMR",
+          "theme": "nuclear",
+          "qty": 10.0,
+          "avgCost": 8.38,
+          "lastPrice": 12.93,
+          "totalValue": 129.3
+        },
+        {
+          "symbol": "UUUU",
+          "theme": "nuclear",
+          "qty": 6.0,
+          "avgCost": 7.53,
+          "lastPrice": 22.17,
+          "totalValue": 133.02
+        },
+        {
+          "symbol": "COPX",
+          "theme": "commodities",
+          "qty": 10.0,
+          "avgCost": 87.75,
+          "lastPrice": 96.0,
+          "totalValue": 960.0
+        },
+        {
+          "symbol": "SNOW",
+          "theme": "tech",
+          "qty": 4.0,
+          "avgCost": 161.38,
+          "lastPrice": 173.9,
+          "totalValue": 695.6
+        },
+        {
+          "symbol": "SNOW",
+          "theme": "tech",
+          "qty": 4.0,
+          "avgCost": 161.38,
+          "lastPrice": 175.27,
+          "totalValue": 701.08
+        },
+        {
+          "symbol": "IBIT",
+          "theme": "broad",
+          "qty": 16.0,
+          "avgCost": 53.94,
+          "lastPrice": 40.26,
+          "totalValue": 644.16
+        },
+        {
+          "symbol": "VOO",
+          "theme": "broad",
+          "qty": 3.025,
+          "avgCost": 570.0,
+          "lastPrice": 610.0,
+          "totalValue": 1845.25
+        },
+        {
+          "symbol": "COPP",
+          "theme": "commodities",
+          "qty": 35.0,
+          "avgCost": 42.89,
+          "lastPrice": 33.96,
+          "totalValue": 1188.6
+        },
+        {
+          "symbol": "ETHA",
+          "theme": "broad",
+          "qty": 40.0,
+          "avgCost": 16.9,
+          "lastPrice": 16.37,
+          "totalValue": 654.8
+        },
+        {
+          "symbol": "SCHD",
+          "theme": "broad",
+          "qty": 6.549,
+          "avgCost": 22.17,
+          "lastPrice": 30.76,
+          "totalValue": 201.45
+        },
+        {
+          "symbol": "SILJ",
+          "theme": "commodities",
+          "qty": 60.0,
+          "avgCost": 30.0,
+          "lastPrice": 27.73,
+          "totalValue": 1663.8
+        },
+        {
+          "symbol": "SMH",
+          "theme": "broad",
+          "qty": 3.0,
+          "avgCost": 385.2,
+          "lastPrice": 419.0,
+          "totalValue": 1257.0
+        },
+        {
+          "symbol": "EWY",
+          "theme": "broad",
+          "qty": 10.0,
+          "avgCost": 107.41,
+          "lastPrice": 137.0,
+          "totalValue": 1370.0
+        },
+        {
+          "symbol": "COPX",
+          "theme": "commodities",
+          "qty": 15.1,
+          "avgCost": 82.74,
+          "lastPrice": 87.77,
+          "totalValue": 1325.24
+        },
+        {
+          "symbol": "LNG",
+          "theme": "energy",
+          "qty": 8.0,
+          "avgCost": 279.353,
+          "lastPrice": 255.56,
+          "totalValue": 2044.48
+        }
+      ]
+    },
+    "block_1062": {
+      "label": "Sleeve at row 1062",
+      "category": "unknown",
+      "sourceRow": 1062,
+      "totalValue": 19256.8,
+      "positions": [
+        {
+          "symbol": "PSLV",
+          "theme": "commodities",
+          "qty": 257.0,
+          "avgCost": 12.5,
+          "lastPrice": 33.5,
+          "totalValue": 8609.5
+        },
+        {
+          "symbol": "NOW",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 167.0,
+          "lastPrice": 117.0,
+          "totalValue": 1170.0
+        },
+        {
+          "symbol": "OKLO",
+          "theme": "nuclear",
+          "qty": 12.0,
+          "avgCost": 9.0,
+          "lastPrice": 66.0,
+          "totalValue": 792.0
+        },
+        {
+          "symbol": "HGRAF",
+          "theme": "commodities",
+          "qty": 1165.0,
+          "avgCost": 1.39,
+          "lastPrice": 3.92,
+          "totalValue": 4566.8
+        },
+        {
+          "symbol": "CRWD",
+          "theme": "tech",
+          "qty": 10.0,
+          "avgCost": 435.0,
+          "lastPrice": 411.85,
+          "totalValue": 4118.5
+        }
       ]
     }
   }

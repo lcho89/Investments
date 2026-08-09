@@ -56,6 +56,19 @@ Use `get_holdings` to retrieve current positions and `get_price_data` to assess 
 
 Tag all risk assessments: **High / Medium / Low** probability × **High / Medium / Low** impact.
 
+## Coverage Universe (from portfolio/holdings.json, 2026-08-08)
+
+**Broad:** CG DBA DBMF DLR ETHA EWY FHLC FSMAX FSPSX FTIHX FXAIX IBIT JEPI JLGMX KKR LMT PHYS QQQ SCHD SMH VFFVX VFIFX VIVIX VOO VT VTI VWO XAR
+**Tech:** AAPL AMD AVDX AVGO BABA BYND CRWD CYBR DDOG DIS EMQQ ESTC MCHI MDB MNDY MRVL MSFT MU NBIS NKE NOW NU NVDA PANW PLTR PYPL RSKD SE SEV SIRI SNOW SPCX SQ TEAM TSLA TSM UBER YOU ZS
+**Energy:** BP BX DVN EQT FENY GEV LNG MMP PBD PWR
+**Commodities:** AG CEF COPP COPX HGRAF LIT LITP PAAS PSLV SBSW SGDJ SGDM SILJ SLV SLVR
+**Nuclear:** AFMJF ANLDF ASPI BQSSF BWXT CCJ CEG DNN FCUUF FMCXF GLATF LTSRF NXE OKLO PENMF SMR SRUUF STTDF UEC URG URNJ URNM UUUU UWEFF VST VULNF WSTRF
+**Other:** FOSYF
+
+Total portfolio ~$653,482 across 14 account sleeves.
+Call `get_holdings` for live quantities and cost basis. Aggregate a ticker across
+sleeves before assessing concentration — several names appear in more than one.
+
 ---
 
 ## Data Sourcing Rules (mandatory)

@@ -53,6 +53,16 @@ Surface immediately (don't wait for routine):
 
 Always use `get_holdings` to ground your analysis in actual positions, and `read_thesis` / `write_thesis` to maintain thesis files.
 
+## Coverage Universe (from portfolio/holdings.json, 2026-08-08)
+
+**Nuclear:** AFMJF ANLDF ASPI BQSSF BWXT CCJ CEG DNN FCUUF FMCXF GLATF LTSRF NXE OKLO PENMF SMR SRUUF STTDF UEC URG URNJ URNM UUUU UWEFF VST VULNF WSTRF
+**Commodities:** AG CEF COPP COPX HGRAF LIT LITP PAAS PSLV SBSW SGDJ SGDM SILJ SLV SLVR
+**Energy:** BP BX DVN EQT FENY GEV LNG MMP PBD PWR
+
+Total portfolio ~$653,482 across 14 account sleeves.
+Call `get_holdings` for live quantities and cost basis. Aggregate a ticker across
+sleeves before assessing concentration — several names appear in more than one.
+
 ---
 
 ## Data Sourcing Rules (mandatory)

@@ -35,6 +35,20 @@ For each routine task, produce:
 
 Always cite sources. Tag confidence level: High / Medium / Speculative.
 
+## Coverage Universe (from portfolio/holdings.json, 2026-08-08)
+
+You now cover the full portfolio, not a sample. Your sector's actual holdings are:
+
+AFMJF ANLDF ASPI BQSSF BWXT CCJ CEG DNN FCUUF FMCXF GLATF LTSRF NXE OKLO PENMF SMR SRUUF STTDF UEC URG URNJ URNM UUUU UWEFF VST VULNF WSTRF
+
+Call `get_holdings` with your theme filter at the start of every run to get live
+quantities and cost basis — the list above is a summary, the file is the source of
+truth. Positions appear across multiple account sleeves; aggregate before judging
+concentration or position size.
+
+Names you do not recognize are likely small OTC or junior miners. Research them or
+report them as uncovered — do not silently omit them.
+
 ---
 
 ## Data Sourcing Rules (mandatory)
