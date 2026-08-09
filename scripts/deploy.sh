@@ -76,12 +76,23 @@ curl -s -X POST "$API/plugins/$PLUGIN_ID/config" -H "Content-Type: application/j
 echo "==> Plugin config saved."
 
 # ── 6b. Load agent instructions + reporting hierarchy ───────────────
+# Resolve the Claude Code CLI to an absolute path. The Paperclip server may run
+# with a different PATH than this shell (e.g. started before ~/.bashrc was
+# updated), and a bare "claude" then fails with: Command not found in PATH.
+CLAUDE_BIN="$(command -v claude || true)"
+if [ -z "$CLAUDE_BIN" ]; then
+  echo "WARNING: 'claude' not found on PATH. Agents cannot run without it."
+  echo "  Install:  npm install -g @anthropic-ai/claude-code"
+  CLAUDE_BIN="claude"
+else
+  echo "==> Claude CLI: $CLAUDE_BIN"
+fi
 # The manifest declares agents with empty instructions; the real mandates
 # live in plugin/instructions/*.md and are pushed here.
-python3 - "$COMPANY_ID" "$REPO_DIR" <<'PY'
+python3 - "$COMPANY_ID" "$REPO_DIR" "$CLAUDE_BIN" <<'PY'
 import json, sys, urllib.request
 
-company_id, repo = sys.argv[1], sys.argv[2]
+company_id, repo, claude_bin = sys.argv[1], sys.argv[2], sys.argv[3]
 API = "http://localhost:3100/api"
 
 # display name -> (instruction stem, manager, model, monthly budget USD)
@@ -123,6 +134,7 @@ for name, (stem, manager, model, budget) in ORG.items():
             # Pin the CLI lane. Left on auto, the adapter may select ACP, which
             # rejects the `effort` option and fails with acpx_session_config_failed.
             "engine": "cli",
+            "command": claude_bin,
             "model": model,
             "cwd": repo,
             "instructionsFilePath": f"{repo}/plugin/instructions/{stem}.md",
