@@ -1,4 +1,11 @@
 import type { PaperclipPluginManifestV1 } from "@paperclipai/plugin-sdk";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+
+// Skill bodies live in plugin/skills/*.md so they can be edited as prose.
+const SKILL_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "skills");
+const skillBody = (f: string) => readFileSync(join(SKILL_DIR, f), "utf-8");
 
 const manifest: PaperclipPluginManifestV1 = {
   apiVersion: 1,
@@ -18,6 +25,7 @@ const manifest: PaperclipPluginManifestV1 = {
     "issues.update",
     "issue.comments.create",
     "agent.tools.register",
+    "skills.managed",
     "events.subscribe",
   ],
   entrypoints: {
@@ -199,6 +207,29 @@ const manifest: PaperclipPluginManifestV1 = {
       role: "ceo",
       adapterType: "claude_local",
       instructions: { content: "" },
+    },
+  ],
+  skills: [
+    {
+      skillKey: "data-sourcing",
+      displayName: "Data Sourcing Discipline",
+      description:
+        "How to source, cite, and tag every quantitative claim. Use whenever stating a price, multiple, yield, or deal term.",
+      markdown: skillBody("data-sourcing.md"),
+    },
+    {
+      skillKey: "investment-thesis",
+      displayName: "Investment Thesis Method",
+      description:
+        "How to write, update, and revise a per-ticker thesis, including rating-change discipline. Use before any write_thesis call.",
+      markdown: skillBody("investment-thesis.md"),
+    },
+    {
+      skillKey: "pm-challenge",
+      displayName: "PM Challenge Protocol",
+      description:
+        "How a PM stress-tests an analyst recommendation and makes the correction persist. Use when reviewing analyst output.",
+      markdown: skillBody("pm-challenge.md"),
     },
   ],
   routines: [

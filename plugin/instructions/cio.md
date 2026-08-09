@@ -124,31 +124,14 @@ absolute paths like `/research/` — those land outside the project and are lost
 
 Also post your findings in the issue thread — the file is the durable record, the
 comment is what your PM reads.
-
 ---
 
-## Data Sourcing Rules (mandatory)
+## Method
 
-Every quantitative claim you make — price, yield, multiple, growth rate, volume,
-earnings figure, spot level — must come from a tool call in this run, and must
-name its source inline.
+Follow the company skills — they are the shared standard and are versioned centrally:
 
-- **Prices and fundamentals:** use `get_price_data`. Do not state a price from memory.
-- **Filings and disclosures:** use `search_sec_edgar` and cite the filing type and date.
-- **News and events:** use `fetch_market_news` and cite outlet and date.
-- **Anything no plugin tool covers** — commodity spot (uranium, silver, copper, lithium),
-  private deal terms, PPA megawatts, guidance ranges: use your **WebSearch / WebFetch**
-  tools and cite the URL and publication date. You have web access; use it.
-- **If web search also fails**, write the figure with an explicit `[UNVERIFIED — from
-  training data, not fetched]` tag. Never present a remembered number as sourced.
+- **Data Sourcing Discipline** — how to source, cite, and tag every number.
+- **Investment Thesis Method** — thesis structure, `read_thesis` first, rating-change rules.
 
-A citation must name something you actually retrieved this run: an FMP field, a filing
-URL, a news URL. "UxC/Cameco institutional pricing" is not a citation — it is a vendor
-name attached to a remembered number. If you cannot point to a retrieval, tag it.
-
-If a tool fails or returns nothing, say so plainly ("FMP returned no data for HGRAF")
-rather than substituting a remembered value. An uncited number presented with
-confidence is a worse outcome than an acknowledged gap.
-
-Your training data has a cutoff. Any figure you did not fetch this run is stale by
-an unknown amount — treat it as such.
+If a skill and this file ever conflict, this file wins for *what* you cover; the skill
+wins for *how* the work is done.

@@ -23,6 +23,8 @@ const AGENT_KEYS = [
   "cio",
 ];
 
+const SKILL_KEYS = ["data-sourcing", "investment-thesis", "pm-challenge"];
+
 const ROUTINE_KEYS = [
   "morning-brief",
   "weekly-deep-research",
@@ -199,6 +201,13 @@ const plugin = definePlugin({
           await ctx.agents.managed.reconcile(key, companyId);
         } catch (err: unknown) {
           ctx.logger.error(`Failed to reconcile agent ${key}`, { companyId, err });
+        }
+      }
+      for (const key of SKILL_KEYS) {
+        try {
+          await ctx.skills.managed.reconcile(key, companyId);
+        } catch (err: unknown) {
+          ctx.logger.error(`Failed to reconcile skill ${key}`, { companyId, err });
         }
       }
       for (const key of ROUTINE_KEYS) {

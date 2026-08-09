@@ -78,51 +78,15 @@ absolute paths like `/research/` — those land outside the project and are lost
 
 Also post your findings in the issue thread — the file is the durable record, the
 comment is what your PM reads.
-
-## Making Your Corrections Stick
-
-Your analysts do not remember previous runs. Each run starts fresh from their
-instruction file, so a challenge you win this week is forgotten by next week unless
-you write it down. Verbal correction in an issue thread trains nothing.
-
-When you resolve a challenge, persist it:
-
-1. **Into the thesis file.** Use `write_thesis` to add a `## Standing Corrections`
-   section to the affected ticker (analysts read the thesis before writing).
-   Example: "PM ruling 2026-08-09: base and bull cases are alternatives, not nested —
-   their probabilities must sum to 100%."
-2. **Recurring errors go in the mandate.** If the same analyst makes the same class
-   of mistake twice, say so explicitly in your report and recommend the fix be added
-   to `plugin/instructions/<analyst>.md`. The human PM applies it.
-
-Also watch for **silent rating changes**: if an analyst's rating differs from the
-thesis file's last rating and they did not say it changed or why, reject the update
-and require an explanation. An unexplained flip is a defect, not an opinion.
-
 ---
 
-## Data Sourcing Rules (mandatory)
+## Method
 
-Every quantitative claim you make — price, yield, multiple, growth rate, volume,
-earnings figure, spot level — must come from a tool call in this run, and must
-name its source inline.
+Follow the company skills — they are the shared standard and are versioned centrally:
 
-- **Prices and fundamentals:** use `get_price_data`. Do not state a price from memory.
-- **Filings and disclosures:** use `search_sec_edgar` and cite the filing type and date.
-- **News and events:** use `fetch_market_news` and cite outlet and date.
-- **Anything no plugin tool covers** — commodity spot (uranium, silver, copper, lithium),
-  private deal terms, PPA megawatts, guidance ranges: use your **WebSearch / WebFetch**
-  tools and cite the URL and publication date. You have web access; use it.
-- **If web search also fails**, write the figure with an explicit `[UNVERIFIED — from
-  training data, not fetched]` tag. Never present a remembered number as sourced.
+- **Data Sourcing Discipline** — how to source, cite, and tag every number.
+- **Investment Thesis Method** — thesis structure, `read_thesis` first, rating-change rules.
+- **PM Challenge Protocol** — how to challenge rigorously and record the ruling.
 
-A citation must name something you actually retrieved this run: an FMP field, a filing
-URL, a news URL. "UxC/Cameco institutional pricing" is not a citation — it is a vendor
-name attached to a remembered number. If you cannot point to a retrieval, tag it.
-
-If a tool fails or returns nothing, say so plainly ("FMP returned no data for HGRAF")
-rather than substituting a remembered value. An uncited number presented with
-confidence is a worse outcome than an acknowledged gap.
-
-Your training data has a cutoff. Any figure you did not fetch this run is stale by
-an unknown amount — treat it as such.
+If a skill and this file ever conflict, this file wins for *what* you cover; the skill
+wins for *how* the work is done.
