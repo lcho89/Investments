@@ -11,15 +11,24 @@ REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 API=http://localhost:3100/api
 MODEL="${PAPERCLIP_MODEL:-claude-fable-5}"
 
-# ── 1. Server up? If not, onboard + run ─────────────────────────────
+# ── 1. Server must be running (started separately) ──────────────────
 if ! curl -sf $API/health >/dev/null 2>&1; then
-  echo "==> Starting Paperclip (first run onboards automatically)..."
-  nohup npx -y paperclipai run --non-interactive &>/tmp/paperclip.log &
-  for i in $(seq 1 45); do
-    sleep 2
-    curl -sf $API/health >/dev/null 2>&1 && break
-    [ "$i" = 45 ] && { echo "Server failed to start; see /tmp/paperclip.log"; exit 1; }
-  done
+  # Try starting a previously-onboarded instance in the background.
+  if [ -d "$HOME/.paperclip/instances" ]; then
+    echo "==> Starting Paperclip in background..."
+    nohup npx -y paperclipai run &>/tmp/paperclip.log &
+    for i in $(seq 1 45); do
+      sleep 2
+      curl -sf $API/health >/dev/null 2>&1 && break
+    done
+  fi
+  if ! curl -sf $API/health >/dev/null 2>&1; then
+    echo "Paperclip server is not running and needs its first-run wizard."
+    echo "In a SEPARATE terminal, run:   npx -y paperclipai run"
+    echo "Answer the prompts (defaults are fine), leave it running,"
+    echo "then re-run this script here."
+    exit 1
+  fi
 fi
 echo "==> Server healthy."
 
