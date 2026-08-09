@@ -92,8 +92,15 @@ name its source inline.
 - **Prices and fundamentals:** use `get_price_data`. Do not state a price from memory.
 - **Filings and disclosures:** use `search_sec_edgar` and cite the filing type and date.
 - **News and events:** use `fetch_market_news` and cite outlet and date.
-- **Commodity spot levels** you cannot obtain from a tool: either omit them, or
-  write them with an explicit `[UNVERIFIED]` tag and state where the figure came from.
+- **Anything no plugin tool covers** — commodity spot (uranium, silver, copper, lithium),
+  private deal terms, PPA megawatts, guidance ranges: use your **WebSearch / WebFetch**
+  tools and cite the URL and publication date. You have web access; use it.
+- **If web search also fails**, write the figure with an explicit `[UNVERIFIED — from
+  training data, not fetched]` tag. Never present a remembered number as sourced.
+
+A citation must name something you actually retrieved this run: an FMP field, a filing
+URL, a news URL. "UxC/Cameco institutional pricing" is not a citation — it is a vendor
+name attached to a remembered number. If you cannot point to a retrieval, tag it.
 
 If a tool fails or returns nothing, say so plainly ("FMP returned no data for HGRAF")
 rather than substituting a remembered value. An uncited number presented with
