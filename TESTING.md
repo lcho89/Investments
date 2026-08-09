@@ -87,6 +87,8 @@ thesis against last week's and see exactly what changed.
 | Rating changed with no explanation | The defect that corrupts memos silently | PM should reject; if it doesn't, tighten `pm-challenge.md` |
 | Probabilities summing past 100% | Analysis is decorative, not real | Log in `reports/LESSONS.md`; consider Sonnet for analysts |
 | Files outside `theses/` or `reports/` | Path rules not being followed | Check agent `cwd` in deploy output |
+| `acpx_session_config_failed` ... does not advertise 'effort' | Adapter chose the ACP lane, which rejects `effort` | Already fixed: `engine: "cli"` is pinned in deploy.sh. Re-run deploy, then retry the blocked issue. |
+| Issue stuck in `blocked` after a failed run | Paperclip's recovery couldn't find a live execution path | Fix the cause, redeploy, then reopen the issue and move it back to `todo` so it gets picked up |
 | Same error every week | Correction isn't persisting | Promote it into the analyst's instruction file |
 
 Instruction and skill files take effect on the **next run** — edit and go, no redeploy.

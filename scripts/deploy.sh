@@ -120,6 +120,9 @@ for name, (stem, manager, model, budget) in ORG.items():
     patch = {
         "adapterType": "claude_local",
         "adapterConfig": {
+            # Pin the CLI lane. Left on auto, the adapter may select ACP, which
+            # rejects the `effort` option and fails with acpx_session_config_failed.
+            "engine": "cli",
             "model": model,
             "cwd": repo,
             "instructionsFilePath": f"{repo}/plugin/instructions/{stem}.md",
