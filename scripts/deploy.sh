@@ -38,10 +38,11 @@ cd "$REPO_DIR/plugin"
 npm run build --silent
 echo "==> Plugin built."
 
-# ── 3. Install plugin (skip if already ready) ───────────────────────
-if ! npx paperclipai plugin inspect investment-research 2>/dev/null | grep -q "status=ready"; then
-  npx paperclipai plugin install "$REPO_DIR/plugin"
-fi
+# ── 3. Install plugin (replace any existing record) ─────────────────
+# Always uninstall first: a prior failed install leaves a non-ready record
+# that blocks reinstall, and this guarantees the latest build is loaded.
+npx paperclipai plugin uninstall investment-research >/dev/null 2>&1 || true
+npx paperclipai plugin install "$REPO_DIR/plugin"
 echo "==> Plugin installed."
 
 # ── 4. Company (create if none) ─────────────────────────────────────
