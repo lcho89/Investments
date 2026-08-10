@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
-"""Rebuild portfolio/holdings.json from published Google Sheet CSV tabs.
+"""Rebuild portfolio/holdings.json from per-account CSV exports.
 
-Each account tab is published to the web as CSV (File > Share > Publish to web >
-pick the tab > CSV), and its URL goes in portfolio/sources.json. No auth needed.
+Default (private): download each account tab from the sheet
+(File > Download > Comma-separated values) into portfolio/exports/, then run this.
+Nothing is published and no credentials are stored.
+
+Optionally an account may specify csvUrl instead of file, if you do have a
+fetchable URL. File takes precedence when both are present.
 
 Usage:  python3 scripts/refresh_holdings.py
 """
@@ -90,22 +94,32 @@ def main():
     if not SOURCES.exists():
         sys.exit(
             f"Missing {SOURCES}.\n\n"
-            "Create it like this, using Publish-to-web CSV URLs:\n"
+            "Create it like this, pointing at CSVs you exported from the sheet:\n"
             '{\n'
             '  "accounts": [\n'
-            '    {"key": "taxable",    "label": "Stock brokerage (taxable)", "category": "taxable",    "csvUrl": "https://docs.google.com/.../pub?gid=0&single=true&output=csv"},\n'
-            '    {"key": "401k",       "label": "401k",                      "category": "retirement", "csvUrl": "..."},\n'
-            '    {"key": "roth",       "label": "Roth",                      "category": "retirement", "csvUrl": "..."}\n'
+            '    {"key": "taxable", "label": "Stock brokerage (taxable)", "category": "taxable",    "file": "portfolio/exports/taxable.csv"},\n'
+            '    {"key": "401k",    "label": "401k",                      "category": "retirement", "file": "portfolio/exports/401k.csv"},\n'
+            '    {"key": "roth",    "label": "Roth",                      "category": "retirement", "file": "portfolio/exports/roth.csv"}\n'
             '  ]\n'
-            '}\n'
+            '}\n\n'
+            "Then: in the sheet, File > Download > Comma-separated values, once per tab,\n"
+            "and save them to portfolio/exports/ with those names.\n"
         )
 
     cfg = json.loads(SOURCES.read_text())
     accounts, problems = {}, []
     for a in cfg["accounts"]:
         try:
-            with urllib.request.urlopen(a["csvUrl"], timeout=30) as r:
-                text = r.read().decode("utf-8", "replace")
+            if a.get("file"):
+                path = ROOT / a["file"]
+                if not path.exists():
+                    raise FileNotFoundError(f"missing export: {a['file']}")
+                text = path.read_text(encoding="utf-8", errors="replace")
+            elif a.get("csvUrl"):
+                with urllib.request.urlopen(a["csvUrl"], timeout=30) as r:
+                    text = r.read().decode("utf-8", "replace")
+            else:
+                raise ValueError("account needs either 'file' or 'csvUrl'")
             positions = parse_csv(text)
             if not positions:
                 problems.append(f"{a['key']}: parsed 0 positions")

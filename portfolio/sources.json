@@ -1,0 +1,8 @@
+{
+  "_comment": "Export each account tab from the sheet (File > Download > CSV) into portfolio/exports/, then run: python3 scripts/refresh_holdings.py",
+  "accounts": [
+    {"key": "taxable", "label": "Stock brokerage (taxable)", "category": "taxable",    "file": "portfolio/exports/taxable.csv"},
+    {"key": "401k",    "label": "401k",                      "category": "retirement", "file": "portfolio/exports/401k.csv"},
+    {"key": "roth",    "label": "Roth",                      "category": "retirement", "file": "portfolio/exports/roth.csv"}
+  ]
+}

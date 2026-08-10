@@ -71,28 +71,22 @@ the Claude subscription rather than a separate API bill.
 update itself. Trade on Tuesday and every agent still reasons on Monday's cost
 basis, producing confident, well-sourced, wrong recommendations.
 
-**One-time setup.** In the Google Sheet: File > Share > Publish to web, pick a
-tab, choose CSV, publish. Do that for the taxable, 401k, and Roth tabs, then put
-the URLs in `portfolio/sources.json`:
+**One-time setup.** Create `portfolio/sources.json` (already committed with sensible
+defaults) and make sure `portfolio/exports/` exists. Nothing is published; the
+export folder is gitignored so raw account data never reaches the repo.
 
-```json
-{
-  "accounts": [
-    {"key": "taxable", "label": "Stock brokerage (taxable)", "category": "taxable",    "csvUrl": "https://docs.google.com/.../pub?gid=0&single=true&output=csv"},
-    {"key": "401k",    "label": "401k",                      "category": "retirement", "csvUrl": "..."},
-    {"key": "roth",    "label": "Roth",                      "category": "retirement", "csvUrl": "..."}
-  ]
-}
-```
+**After you trade** — update the sheet as usual, then export and refresh:
 
-Published CSVs need no auth, so this works unattended.
-
-**After that, whenever you trade** (update the sheet first):
+1. In the sheet: **File > Download > Comma-separated values**, once per account tab.
+2. Save them as `portfolio/exports/taxable.csv`, `401k.csv`, `roth.csv`.
+3. Run:
 
 ```bash
 python3 scripts/refresh_holdings.py
 git add portfolio/holdings.json && git commit -m "Refresh holdings" && git push
 ```
+
+Takes about a minute. Do it before any weekly cycle.
 
 Run it before any weekly cycle. Agents warn when `asOf` is more than 5 days old,
 but a warning is not a substitute for current data.
