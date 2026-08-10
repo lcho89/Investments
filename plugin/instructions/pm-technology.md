@@ -78,6 +78,18 @@ absolute paths like `/research/` — those land outside the project and are lost
 
 Also post your findings in the issue thread — the file is the durable record, the
 comment is what your PM reads.
+## Data Freshness (check first)
+
+`portfolio/holdings.json` has an `asOf` date. Trades happen between runs, so the
+file can be stale.
+
+- If `asOf` is more than 5 days old, say so at the top of your output:
+  "Holdings as of <date>, N days stale — position sizes and cost basis may not
+  reflect recent trades."
+- Never infer a trade happened. If a position looks inconsistent with your last
+  thesis, report the discrepancy; do not assume you know what changed.
+- Refresh is a human action: `python3 scripts/refresh_holdings.py`.
+
 ---
 
 ## Method
