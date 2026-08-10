@@ -71,22 +71,48 @@ the Claude subscription rather than a separate API bill.
 update itself. Trade on Tuesday and every agent still reasons on Monday's cost
 basis, producing confident, well-sourced, wrong recommendations.
 
-**One-time setup.** Create `portfolio/sources.json` (already committed with sensible
-defaults) and make sure `portfolio/exports/` exists. Nothing is published; the
-export folder is gitignored so raw account data never reaches the repo.
+### One-time setup (~10 min)
 
-**After you trade** — update the sheet as usual, then export and refresh:
-
-1. In the sheet: **File > Download > Comma-separated values**, once per account tab.
-2. Save them as `portfolio/exports/taxable.csv`, `401k.csv`, `roth.csv`.
-3. Run:
+Install rclone and authorise Google Drive. Nothing is published; the token stays
+on this machine.
 
 ```bash
+sudo -v ; curl https://rclone.org/install.sh | sudo bash
+pip install openpyxl
+rclone config
+```
+
+In `rclone config`: `n` (new remote) → name it **gdrive** → storage **drive** →
+accept the blank client_id/secret → scope **2** (read-only) → blank root/service
+account → `y` to use auto config (opens a browser to sign in) → `n` to team
+drive → `y` to confirm → `q` to quit.
+
+Then fetch the workbook once and see the tab names:
+
+```bash
+python3 scripts/refresh_holdings.py     # fetches; will error on placeholder tabs
+python3 scripts/list-tabs.py
+```
+
+Put the three real tab names into `portfolio/sources.json`, replacing the
+`REPLACE_WITH_*` placeholders. If your sheet is not named exactly `Investments`
+at the Drive root, adjust `rclone.remote` too (e.g. `gdrive:Finance/Investments`).
+
+### After that, every time you trade
+
+Update the sheet as usual, then:
+
+```bash
+cd ~/Investments
 python3 scripts/refresh_holdings.py
 git add portfolio/holdings.json && git commit -m "Refresh holdings" && git push
 ```
 
-Takes about a minute. Do it before any weekly cycle.
+One command. It pulls the current sheet, rebuilds `holdings.json` from all three
+tabs, and skips any row marked sold. Run it before any weekly cycle — agents warn
+when `asOf` is more than five days old, but a warning is not current data.
 
-Run it before any weekly cycle. Agents warn when `asOf` is more than 5 days old,
-but a warning is not a substitute for current data.
+**Manual fallback** if you would rather not authorise Drive: export each tab
+(File > Download > CSV) into `portfolio/exports/`, and in `sources.json` replace
+each account's `"tab"` with `"file": "portfolio/exports/<name>.csv"`.
+

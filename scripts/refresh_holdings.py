@@ -10,7 +10,7 @@ fetchable URL. File takes precedence when both are present.
 
 Usage:  python3 scripts/refresh_holdings.py
 """
-import csv, io, json, re, sys, urllib.request
+import csv, io, json, re, subprocess, sys, urllib.request
 from datetime import date
 from pathlib import Path
 
@@ -38,9 +38,43 @@ def num(s):
         return None
 
 
+def rows_from_xlsx(path, sheet_name):
+    """Read a worksheet as rows of strings. Requires openpyxl."""
+    try:
+        from openpyxl import load_workbook
+    except ImportError:
+        sys.exit("openpyxl is required for xlsx input.  pip install openpyxl")
+    wb = load_workbook(path, data_only=True, read_only=True)
+    if sheet_name not in wb.sheetnames:
+        raise ValueError(f"tab {sheet_name!r} not found. Tabs: {', '.join(wb.sheetnames)}")
+    return [["" if c is None else str(c) for c in row]
+            for row in wb[sheet_name].iter_rows(values_only=True)]
+
+
+def fetch_workbook(cfg):
+    """Pull the sheet from Drive via rclone as xlsx (all tabs, stays private)."""
+    rc = cfg.get("rclone")
+    if not rc:
+        return None
+    dest = ROOT / rc.get("localPath", "portfolio/exports/workbook.xlsx")
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    cmd = ["rclone", "copyto", "--drive-export-formats", "xlsx", rc["remote"], str(dest)]
+    print(f"  fetching via rclone: {rc['remote']}")
+    try:
+        subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=120)
+    except FileNotFoundError:
+        sys.exit("rclone not found.  Install: sudo -v ; curl https://rclone.org/install.sh | sudo bash")
+    except subprocess.CalledProcessError as e:
+        sys.exit(f"rclone failed:\n{e.stderr.strip()}")
+    return dest
+
+
 def parse_csv(text):
+    return parse_rows(list(csv.reader(io.StringIO(text))))
+
+
+def parse_rows(rows):
     """Find the header row, then read positions until the table ends."""
-    rows = list(csv.reader(io.StringIO(text)))
     header_i = None
     for i, r in enumerate(rows):
         low = [c.strip().lower() for c in r]
@@ -107,10 +141,17 @@ def main():
         )
 
     cfg = json.loads(SOURCES.read_text())
+    workbook = fetch_workbook(cfg)
     accounts, problems = {}, []
     for a in cfg["accounts"]:
         try:
-            if a.get("file"):
+            if a.get("tab"):
+                src = workbook or (ROOT / cfg.get("rclone", {}).get("localPath", "portfolio/exports/workbook.xlsx"))
+                if not Path(src).exists():
+                    raise FileNotFoundError(f"workbook not found at {src}")
+                positions = parse_rows(rows_from_xlsx(src, a["tab"]))
+                text = None
+            elif a.get("file"):
                 path = ROOT / a["file"]
                 if not path.exists():
                     raise FileNotFoundError(f"missing export: {a['file']}")
@@ -119,8 +160,9 @@ def main():
                 with urllib.request.urlopen(a["csvUrl"], timeout=30) as r:
                     text = r.read().decode("utf-8", "replace")
             else:
-                raise ValueError("account needs either 'file' or 'csvUrl'")
-            positions = parse_csv(text)
+                raise ValueError("account needs 'tab', 'file', or 'csvUrl'")
+            if text is not None:
+                positions = parse_csv(text)
             if not positions:
                 problems.append(f"{a['key']}: parsed 0 positions")
             accounts[a["key"]] = {
