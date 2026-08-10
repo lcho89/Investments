@@ -145,11 +145,29 @@ def main():
     accounts, problems = {}, []
     for a in cfg["accounts"]:
         try:
-            if a.get("tab"):
+            if a.get("tab") or a.get("tabs"):
                 src = workbook or (ROOT / cfg.get("rclone", {}).get("localPath", "portfolio/exports/workbook.xlsx"))
                 if not Path(src).exists():
                     raise FileNotFoundError(f"workbook not found at {src}")
-                positions = parse_rows(rows_from_xlsx(src, a["tab"]))
+                tabs = a.get("tabs") or [a["tab"]]
+                positions, seen = [], {}
+                for t in tabs:
+                    for p in parse_rows(rows_from_xlsx(src, t)):
+                        p["tab"] = t
+                        key = p["symbol"]
+                        if key in seen:   # same ticker on two tabs: merge, weight the cost
+                            q0, q1 = seen[key]["qty"], p["qty"]
+                            c0, c1 = seen[key]["avgCost"], p["avgCost"]
+                            seen[key]["qty"] = round(q0 + q1, 4)
+                            if c0 is not None and c1 is not None and (q0 + q1):
+                                seen[key]["avgCost"] = round((c0 * q0 + c1 * q1) / (q0 + q1), 4)
+                            for f in ("totalValue",):
+                                if seen[key][f] is not None and p[f] is not None:
+                                    seen[key][f] = round(seen[key][f] + p[f], 2)
+                            seen[key]["tab"] += f"+{t}"
+                        else:
+                            seen[key] = p
+                            positions.append(p)
                 text = None
             elif a.get("file"):
                 path = ROOT / a["file"]
