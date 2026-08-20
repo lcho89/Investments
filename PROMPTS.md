@@ -118,6 +118,8 @@ probability-weighted return. Save with write_thesis.
 | Earnings reaction | the sector's analyst | `<TICKER> reported. Pull the release and any 8-K, compare against our thesis, and tell me whether the thesis strengthened, weakened, or is unchanged.` |
 | Tax-aware trim check | PM | `Which positions are up enough to consider trimming? Separate taxable from 401k/Roth — I care about the capital-gains consequence in the taxable account.` |
 | Concentration check | Portfolio Risk Analyst | `What is my largest correlated exposure across all accounts? Treat highly correlated pairs as single positions.` |
+| Look-through overlap | Portfolio Risk Analyst | `Use get_fund_holdings on every ETF and index fund we own, and compute true single-name exposure: direct position plus each name's weight inside every fund. Which names am I more exposed to than the position list suggests?` |
+| Fund review | the sector's analyst | `Review <ETF> using the ETF and Fund Analysis skill: wrapper type, expense ratio in bps and dollars on our position, premium/discount to NAV, top-10 concentration, and overlap with what we hold elsewhere. No DCF.` |
 | Stress test | Portfolio Risk Analyst | `If AI datacenter capex growth halved, what happens to this portfolio? Name the positions that would move together and estimate the drawdown.` |
 | New idea vetting | the sector's analyst | `I am considering <TICKER>. Run the Equity Research Standard, categorise it, derive a target with a stated method, and give me bull/base/bear with probabilities. Check how it correlates with what we already own.` |
 | Valuation only | the sector's analyst | `Value <TICKER> using the Valuation Methods skill. DCF if it has positive FCF, comps otherwise. Show the sensitivity table and the football field.` |

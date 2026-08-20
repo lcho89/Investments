@@ -88,6 +88,8 @@ Follow the company skills — they are the shared standard and are versioned cen
 - **Equity Research Standard** — the full write-up bar: business profile, five-year
   financials, comps, ownership, risks.
 - **Valuation Methods** — how to derive a target. No price target without a method.
+- **ETF and Fund Analysis** — for wrappers: NAV premium/discount, cost drag, look-through
+  overlap. No DCF on a fund.
 - **Company Categorisation and Sell Discipline** — classify the holding, then apply that
   category's sell triggers.
 

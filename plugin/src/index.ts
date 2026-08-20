@@ -2,7 +2,7 @@ import { definePlugin, runWorker, z } from "@paperclipai/plugin-sdk";
 import { getHoldings, getAccountSummary } from "./tools/portfolio.js";
 import { searchSecEdgar, fetchMarketNews, getPriceData } from "./tools/research.js";
 import { readThesis, writeThesis } from "./tools/thesis.js";
-import { getFinancials, getPeerComps, getOwnership } from "./tools/financials.js";
+import { getFinancials, getPeerComps, getOwnership, getFundHoldings } from "./tools/financials.js";
 
 const configSchema = z.object({
   newsApiKey: z.string().optional(),
@@ -29,6 +29,7 @@ const SKILL_KEYS = [
   "investment-thesis",
   "equity-research-standard",
   "valuation-methods",
+  "fund-analysis",
   "company-categorization",
   "pm-challenge",
 ];
@@ -230,6 +231,29 @@ const plugin = definePlugin({
         const cfg = await config(runCtx.companyId);
         if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
         return { data: await getOwnership(symbol, cfg.fmpApiKey) };
+      }
+    );
+
+    ctx.tools.register(
+      "get_fund_holdings",
+      {
+        displayName: "Get Fund Holdings",
+        description:
+          "ETF or fund holdings, weights, sector mix, expense ratio and concentration. Use for look-through analysis — computing true single-name exposure across funds plus direct positions.",
+        parametersSchema: {
+          type: "object",
+          required: ["symbol"],
+          properties: {
+            symbol: { type: "string" },
+            top: { type: "number", default: 25, description: "How many holdings to return" },
+          },
+        },
+      },
+      async (params, runCtx) => {
+        const { symbol, top } = params as { symbol: string; top?: number };
+        const cfg = await config(runCtx.companyId);
+        if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
+        return { data: await getFundHoldings(symbol, cfg.fmpApiKey, top ?? 25) };
       }
     );
 

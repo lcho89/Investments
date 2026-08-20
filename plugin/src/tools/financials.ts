@@ -287,3 +287,56 @@ export async function getOwnership(symbol: string, key: string): Promise<object>
       "Insider buckets are inferred from SEC transaction codes (P/A = acquisition, S/D = disposition). Grants and option exercises inflate 'buying' — read the recent rows before drawing a conclusion.",
   };
 }
+
+/**
+ * Fund holdings and sector weights, for look-through overlap analysis.
+ * A direct position plus the same name inside three index funds is one exposure,
+ * not four — this is what lets the risk analyst compute that.
+ */
+export async function getFundHoldings(symbol: string, key: string, top = 25): Promise<object> {
+  const s = symbol.toUpperCase();
+  const [info, holders, sectors] = await Promise.all([
+    fmp(`/v4/etf-info?symbol=${s}`, key),
+    fmp(`/v3/etf-holder/${s}`, key),
+    fmp(`/v3/etf-sector-weightings/${s}`, key),
+  ]);
+
+  const meta = Array.isArray(info) ? info[0] : info?._error ? null : info;
+  const H = Array.isArray(holders) ? holders : [];
+  if (!H.length && !meta) {
+    return {
+      symbol: s,
+      error:
+        "No fund data returned. This may not be an ETF, or the endpoint is outside your FMP plan. Report the gap rather than estimating weights.",
+    };
+  }
+
+  const ranked = [...H]
+    .filter((h) => typeof h.weightPercentage === "number")
+    .sort((a, b) => b.weightPercentage - a.weightPercentage);
+  const sum = (rows: any[]) =>
+    Number(rows.reduce((a, h) => a + (h.weightPercentage ?? 0), 0).toFixed(2));
+
+  return {
+    symbol: s,
+    name: meta?.name ?? null,
+    expenseRatioPct: meta?.expenseRatio ?? null,
+    aum: meta?.aum ?? null,
+    avgVolume: meta?.avgVolume ?? null,
+    holdingsCount: meta?.holdingsCount ?? (H.length || null),
+    concentration: {
+      top5WeightPct: sum(ranked.slice(0, 5)),
+      top10WeightPct: sum(ranked.slice(0, 10)),
+      note: "A top-10 weight above ~50% means the fund is a concentrated bet, not diversification.",
+    },
+    sectorWeights: Array.isArray(sectors) ? sectors : null,
+    topHoldings: ranked.slice(0, top).map((h) => ({
+      symbol: h.asset,
+      name: h.name,
+      weightPct: h.weightPercentage,
+      sharesNumber: h.sharesNumber ?? null,
+    })),
+    lookThroughNote:
+      "To compute true exposure to a name: (fund position value x that name's weight) summed across every fund, plus any direct position. Do this before calling a single-name exposure small.",
+  };
+}

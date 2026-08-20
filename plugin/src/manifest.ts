@@ -148,6 +148,17 @@ const manifest: PaperclipPluginManifestV1 = {
       },
     },
     {
+      name: "get_fund_holdings",
+      displayName: "Get Fund Holdings",
+      description:
+        "ETF or fund holdings, weights, sector mix, expense ratio and concentration. Use for look-through analysis — computing true single-name exposure across funds plus direct positions.",
+      parametersSchema: {
+        type: "object",
+        required: ["symbol"],
+        properties: { symbol: { type: "string" }, top: { type: "number", default: 25 } },
+      },
+    },
+    {
       name: "read_thesis",
       displayName: "Read Investment Thesis",
       description: "Read the stored investment thesis for a ticker from the theses/ directory.",
@@ -273,6 +284,13 @@ const manifest: PaperclipPluginManifestV1 = {
       description:
         "How to derive a price target — DCF, trading comparables, triangulation into a football-field range and expected value. Use whenever stating a target, fair value, or upside percentage.",
       markdown: skillBody("valuation-methods.md"),
+    },
+    {
+      skillKey: "fund-analysis",
+      displayName: "ETF and Fund Analysis",
+      description:
+        "How to analyse an ETF, index fund, or physical trust — NAV premium/discount, cost drag, look-through exposure, and overlap with the rest of the book. Use for any wrapper rather than an operating company.",
+      markdown: skillBody("fund-analysis.md"),
     },
     {
       skillKey: "company-categorization",

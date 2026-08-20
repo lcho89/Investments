@@ -19,8 +19,10 @@ Pick the method that fits the security:
 | Commodity ETF or physical trust | NAV per unit and premium/discount to NAV | — |
 | Broad index fund | No target. Say so — these are allocation decisions, not valuation calls |
 
-For an ETF, valuing the wrapper is a category error. Assess the underlying exposure,
-the premium or discount to NAV, and the expense drag. Say that is what you did.
+For an ETF, index fund, or physical trust, stop here and use the **ETF and Fund
+Analysis** skill instead. Valuing a wrapper with a DCF is a category error — there are
+no cash flows to discount. That skill covers NAV premium/discount, cost drag,
+concentration, and look-through overlap.
 
 ---
 
