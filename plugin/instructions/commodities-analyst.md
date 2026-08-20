@@ -83,6 +83,11 @@ Follow the company skills — they are the shared standard and are versioned cen
 
 - **Data Sourcing Discipline** — how to source, cite, and tag every number.
 - **Investment Thesis Method** — thesis structure, `read_thesis` first, rating-change rules.
+- **Equity Research Standard** — the full write-up bar: business profile, five-year
+  financials, comps, ownership, risks.
+- **Valuation Methods** — how to derive a target. No price target without a method.
+- **Company Categorisation and Sell Discipline** — classify the holding, then apply that
+  category's sell triggers.
 
 If a skill and this file ever conflict, this file wins for *what* you cover; the skill
 wins for *how* the work is done.

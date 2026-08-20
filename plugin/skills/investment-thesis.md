@@ -17,24 +17,62 @@ are rulings already made by a PM. Do not relitigate them.
 ## Thesis
 One paragraph: what has to be true for this to work.
 
+## Category
+Slow grower / Stalwart / Cyclical / Fast grower / Turnaround / Asset play
+— one-sentence defence. See the Company Categorisation skill.
+
 ## Position
-Shares, average cost, current price, unrealized P/L, account. From `get_holdings`.
+Shares, average cost, current price, unrealised P/L, account, % of portfolio.
+From `get_holdings`. Aggregate across accounts.
+
+## Business
+Moat mechanism, customers and concentration, competitive structure. Named
+mechanisms, not adjectives.
+
+## Financial Profile
+Five-year table from `get_financials`: revenue and CAGR, gross and operating
+margin trend in percentage points, FCF per diluted share, net cash, leverage
+and coverage. Nulls reported as "not reported", never estimated.
+
+## Valuation
+Method, inputs, output range, sensitivity, and the assumption that moves it
+most. Peer comps from `get_peer_comps` with each peer justified. See the
+Valuation Methods skill. For an ETF or trust: NAV premium/discount and
+underlying exposure instead.
+
+## Expected Value
+Bull / Base / Bear prices with probabilities summing to 100%, and the
+probability-weighted return.
 
 ## Catalysts
-- Catalyst (timeframe, and what observable event confirms it)
+- Catalyst — timeframe, and the observable event that confirms it
 
 ## Risks
-- Risk (severity, and what observable event would confirm it materializing)
+- Risk — severity, and the observable event that would confirm it materialising
 
-## Model
-Valuation metrics with sources.
+## Sell Triggers
+The category's triggers, each marked not triggered / watch / TRIGGERED, with
+today's reading. This is the falsification test.
+
+## Ownership
+Institutional %, top holders, insider activity over 12 months, from
+`get_ownership`.
 
 ## Verdict
 BUY / HOLD / SELL — Confidence: High / Medium / Speculative
+Target: $__ (method) | Horizon: __ months
 
 ## Standing Corrections
 PM rulings, dated. Append only.
+
+## Call Record
+| Date | Verdict | Price | Target | Outcome at review |
+Append one row per review. Never rewrite history — this is how conviction gets
+calibrated against hit rate.
 ```
+
+A thesis missing Category, Valuation, Expected Value or Sell Triggers is
+incomplete. Say so at the top rather than quietly omitting them.
 
 ## Rating-change discipline
 

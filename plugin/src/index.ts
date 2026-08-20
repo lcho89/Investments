@@ -2,6 +2,7 @@ import { definePlugin, runWorker, z } from "@paperclipai/plugin-sdk";
 import { getHoldings, getAccountSummary } from "./tools/portfolio.js";
 import { searchSecEdgar, fetchMarketNews, getPriceData } from "./tools/research.js";
 import { readThesis, writeThesis } from "./tools/thesis.js";
+import { getFinancials, getPeerComps, getOwnership } from "./tools/financials.js";
 
 const configSchema = z.object({
   newsApiKey: z.string().optional(),
@@ -23,7 +24,14 @@ const AGENT_KEYS = [
   "cio",
 ];
 
-const SKILL_KEYS = ["data-sourcing", "investment-thesis", "pm-challenge"];
+const SKILL_KEYS = [
+  "data-sourcing",
+  "investment-thesis",
+  "equity-research-standard",
+  "valuation-methods",
+  "company-categorization",
+  "pm-challenge",
+];
 
 const ROUTINE_KEYS = [
   "morning-brief",
@@ -152,6 +160,76 @@ const plugin = definePlugin({
         const cfg = await config(runCtx.companyId);
         if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
         return { data: await getPriceData(symbol, cfg.fmpApiKey, includeFinancials ?? true) };
+      }
+    );
+
+    ctx.tools.register(
+      "get_financials",
+      {
+        displayName: "Get 5-Year Financials",
+        description:
+          "Five years of income statement, balance sheet and cash flow with derived margins, FCF per diluted share, net cash, leverage and coverage ratios, plus CAGRs. Use this for any financial profile table — never estimate these figures.",
+        parametersSchema: {
+          type: "object",
+          required: ["symbol"],
+          properties: {
+            symbol: { type: "string" },
+            years: { type: "number", default: 5 },
+          },
+        },
+      },
+      async (params, runCtx) => {
+        const { symbol, years } = params as { symbol: string; years?: number };
+        const cfg = await config(runCtx.companyId);
+        if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
+        return { data: await getFinancials(symbol, cfg.fmpApiKey, years ?? 5) };
+      }
+    );
+
+    ctx.tools.register(
+      "get_peer_comps",
+      {
+        displayName: "Get Peer Comparables",
+        description:
+          "Peer group with EV/Revenue, EV/EBITDA, EV/FCF, P/E, PEG, ROIC and growth, plus min/p25/median/mean/p75/max across peers. Use for any relative-valuation or premium/discount claim.",
+        parametersSchema: {
+          type: "object",
+          required: ["symbol"],
+          properties: {
+            symbol: { type: "string" },
+            extraPeers: {
+              type: "array",
+              items: { type: "string" },
+              description: "Additional tickers to force into the peer set",
+            },
+          },
+        },
+      },
+      async (params, runCtx) => {
+        const { symbol, extraPeers } = params as { symbol: string; extraPeers?: string[] };
+        const cfg = await config(runCtx.companyId);
+        if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
+        return { data: await getPeerComps(symbol, cfg.fmpApiKey, extraPeers ?? []) };
+      }
+    );
+
+    ctx.tools.register(
+      "get_ownership",
+      {
+        displayName: "Get Ownership and Insider Activity",
+        description:
+          "Institutional ownership percentage, top 5 holders, and insider buying/selling over the last 12 months.",
+        parametersSchema: {
+          type: "object",
+          required: ["symbol"],
+          properties: { symbol: { type: "string" } },
+        },
+      },
+      async (params, runCtx) => {
+        const { symbol } = params as { symbol: string };
+        const cfg = await config(runCtx.companyId);
+        if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
+        return { data: await getOwnership(symbol, cfg.fmpApiKey) };
       }
     );
 

@@ -112,6 +112,42 @@ const manifest: PaperclipPluginManifestV1 = {
       },
     },
     {
+      name: "get_financials",
+      displayName: "Get 5-Year Financials",
+      description:
+        "Five years of income statement, balance sheet and cash flow with derived margins, FCF per diluted share, net cash, leverage and coverage ratios, plus CAGRs. Use for any financial profile table — never estimate these figures.",
+      parametersSchema: {
+        type: "object",
+        required: ["symbol"],
+        properties: { symbol: { type: "string" }, years: { type: "number", default: 5 } },
+      },
+    },
+    {
+      name: "get_peer_comps",
+      displayName: "Get Peer Comparables",
+      description:
+        "Peer group with EV/Revenue, EV/EBITDA, EV/FCF, P/E, PEG, ROIC and growth, plus distribution statistics. Use for any relative-valuation or premium/discount claim.",
+      parametersSchema: {
+        type: "object",
+        required: ["symbol"],
+        properties: {
+          symbol: { type: "string" },
+          extraPeers: { type: "array", items: { type: "string" } },
+        },
+      },
+    },
+    {
+      name: "get_ownership",
+      displayName: "Get Ownership and Insider Activity",
+      description:
+        "Institutional ownership percentage, top 5 holders, and insider buying/selling over the last 12 months.",
+      parametersSchema: {
+        type: "object",
+        required: ["symbol"],
+        properties: { symbol: { type: "string" } },
+      },
+    },
+    {
       name: "read_thesis",
       displayName: "Read Investment Thesis",
       description: "Read the stored investment thesis for a ticker from the theses/ directory.",
@@ -223,6 +259,27 @@ const manifest: PaperclipPluginManifestV1 = {
       description:
         "How to write, update, and revise a per-ticker thesis, including rating-change discipline. Use before any write_thesis call.",
       markdown: skillBody("investment-thesis.md"),
+    },
+    {
+      skillKey: "equity-research-standard",
+      displayName: "Equity Research Standard",
+      description:
+        "House standard for a full company write-up: business profile, five-year financials from 10-Ks, valuation ratios vs peers, ownership, risks. Use for any initiation or deep-dive.",
+      markdown: skillBody("equity-research-standard.md"),
+    },
+    {
+      skillKey: "valuation-methods",
+      displayName: "Valuation Methods",
+      description:
+        "How to derive a price target — DCF, trading comparables, triangulation into a football-field range and expected value. Use whenever stating a target, fair value, or upside percentage.",
+      markdown: skillBody("valuation-methods.md"),
+    },
+    {
+      skillKey: "company-categorization",
+      displayName: "Company Categorisation and Sell Discipline",
+      description:
+        "Classify a holding as slow grower, stalwart, cyclical, fast grower, turnaround, or asset play, run the category-specific analysis, and apply the matching sell triggers.",
+      markdown: skillBody("company-categorization.md"),
     },
     {
       skillKey: "pm-challenge",

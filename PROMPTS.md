@@ -82,6 +82,33 @@ Stop there and wait — nothing is actionable until I approve.
 Save the memo to reports/cio/YYYY-MM-DD-investment-memo.md.
 ```
 
+## Deep-dive initiation (the full standard)
+
+**Assign to: the sector's analyst.** Expect this to take a while and cost more than a
+routine update — it is the full Equity Research Standard.
+
+```
+Produce a full initiation write-up on <TICKER> to the Equity Research Standard.
+
+Pull the data first: get_financials for the five-year tables, get_peer_comps for
+relative valuation, get_ownership for holders and insiders, and search_sec_edgar with
+fetchText for the latest 10-K.
+
+Cover all six sections: investment thesis (moat, management, growth, margins, capital
+returns, M&A, valuation, catalysts), business profile, five-year financial profile,
+valuation ratios against a justified peer set, ownership, and risks.
+
+Categorise the company using the Company Categorisation skill and run that category's
+specific analysis. State the sell triggers with today's reading on each.
+
+Derive a price target using the Valuation Methods skill — name the method, show the
+inputs, give the sensitivity, and state the assumption that moves it most. If no
+defensible target can be built, say so and give the relative-value read instead.
+
+Finish with bull/base/bear prices, probabilities summing to 100%, and the
+probability-weighted return. Save with write_thesis.
+```
+
 ## Ad-hoc prompts
 
 | Purpose | Agent | Prompt |
@@ -92,7 +119,10 @@ Save the memo to reports/cio/YYYY-MM-DD-investment-memo.md.
 | Tax-aware trim check | PM | `Which positions are up enough to consider trimming? Separate taxable from 401k/Roth — I care about the capital-gains consequence in the taxable account.` |
 | Concentration check | Portfolio Risk Analyst | `What is my largest correlated exposure across all accounts? Treat highly correlated pairs as single positions.` |
 | Stress test | Portfolio Risk Analyst | `If AI datacenter capex growth halved, what happens to this portfolio? Name the positions that would move together and estimate the drawdown.` |
-| New idea vetting | the sector's analyst | `I am considering <TICKER>. Build the bull and bear case, check how it correlates with what we already own, and give me a verdict with confidence.` |
+| New idea vetting | the sector's analyst | `I am considering <TICKER>. Run the Equity Research Standard, categorise it, derive a target with a stated method, and give me bull/base/bear with probabilities. Check how it correlates with what we already own.` |
+| Valuation only | the sector's analyst | `Value <TICKER> using the Valuation Methods skill. DCF if it has positive FCF, comps otherwise. Show the sensitivity table and the football field.` |
+| Category and sell check | the sector's analyst | `Which category is <TICKER>, and what is the reading on each of that category's sell triggers today?` |
+| Score past calls | CIO | `Review the Call Record in every thesis file. Which calls were right, which were wrong, and is our confidence calibrated to our hit rate?` |
 | Weekly catch-up | CIO | `Summarise what changed in the portfolio this week and what needs my attention. Be brief — flag only what is decision-relevant.` |
 
 ## Prompting notes

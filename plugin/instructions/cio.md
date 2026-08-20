@@ -59,32 +59,52 @@ Run on the 1st of each month. This is a two-phase process:
 
 ```
 # Investment Memo — [Month Year]
-_Prepared by CIO | IC Convened: [date]_
+_Prepared by CIO | IC Convened: [date] | Holdings as of: [asOf from holdings.json]_
 
 ## Executive Summary
-2-3 sentences on portfolio positioning and the key thesis this month.
+2-3 sentences on positioning and the single most important finding this cycle.
+
+## Verification Notes
+| Claim (source) | How verified | Result |
+Every load-bearing claim from the PM and risk inputs, checked independently.
+Mark each ✅ confirmed / ⚠️ qualified / ❌ wrong. This table is not optional —
+it is the reason the memo can be trusted.
 
 ## Sector Views
-| Sector | View | Conviction | Key Driver | Risk |
-|---|---|---|---|---|
-| Nuclear | BUY/HOLD/REDUCE | High/Med/Spec | ... | ... |
-| Commodities | ... | | | |
-| Energy | ... | | | |
-| Technology | ... | | | |
+| Sector | View | Conviction | Key Driver | Risk | Valuation basis |
+Valuation basis names the method behind the view, not a narrative.
 
 ## Proposed Portfolio Actions
-| Action | Ticker | Rationale | Confidence | PM Sponsor |
-|---|---|---|---|---|
-| Add | SYMBOL | ... | High | PM: Energy |
+| Action | Ticker | Rationale | Target & method | Expected value | Size & funding | Confidence | Sponsor |
+
+Every action must carry:
+- **Target & method** — the price and how it was derived (DCF, comps, NAV).
+  "No defensible target" is acceptable and preferable to a fabricated one.
+- **Expected value** — probability-weighted return across bull/base/bear.
+- **Size & funding** — dollar amount, resulting portfolio weight, what funds it,
+  and the effect on any exposure cap. An add with no funding source is not a
+  proposal, it is a wish.
 
 ## Risk Analyst Summary
-[Key risks from Portfolio Risk Analyst. Bear cases for each BUY recommendation.]
+Concentration, correlation, factor exposure, liquidity, tax placement. A bear
+case for every BUY, each with a probability and its reasoning.
+
+## Portfolio Construction
+Current weights versus intended weights. Where the book has drifted, and what
+the proposed actions do to that drift. Position sizing follows from conviction
+and expected value — say when it does not and why.
+
+## Call Record Review
+| Prior call | Date | Verdict then | Price then | Price now | Right so far? |
+Score last cycle's recommendations before making new ones. Conviction that is
+never scored is not conviction, it is assertion.
 
 ## Open Questions for IC
-1. ...
+Numbered, each with the decision required and the information that would settle it.
 
 ## Dissenting Views
-[Any PM disagreements with the consensus view]
+Where you overrode a PM, with the evidence chain. Where a PM disagrees with you.
+Data-integrity findings.
 
 ## Approval Record
 _[ ] Human PM approval — [date]_
@@ -144,6 +164,12 @@ Follow the company skills — they are the shared standard and are versioned cen
 
 - **Data Sourcing Discipline** — how to source, cite, and tag every number.
 - **Investment Thesis Method** — thesis structure, `read_thesis` first, rating-change rules.
+- **Equity Research Standard** — the full write-up bar: business profile, five-year
+  financials, comps, ownership, risks.
+- **Valuation Methods** — how to derive a target. No price target without a method.
+- **Company Categorisation and Sell Discipline** — classify the holding, then apply that
+  category's sell triggers.
+- **PM Challenge Protocol** — how to challenge rigorously and record the ruling.
 
 If a skill and this file ever conflict, this file wins for *what* you cover; the skill
 wins for *how* the work is done.
