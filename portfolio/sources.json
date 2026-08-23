@@ -1,12 +1,27 @@
 {
-  "_comment": "Run: python3 scripts/refresh_holdings.py — pulls the sheet privately via rclone and rebuilds holdings.json. See README for one-time rclone setup.",
+  "_comment": "Run: python3 scripts/refresh_holdings.py \u2014 pulls the sheet privately via rclone and rebuilds holdings.json. See README for one-time rclone setup.",
   "rclone": {
     "remote": "gdrive:Investments/Investments.xlsx",
     "localPath": "portfolio/exports/workbook.xlsx"
   },
   "accounts": [
-    {"key": "taxable", "label": "Stock brokerage (taxable)", "category": "taxable",    "tab": "Stock"},
-    {"key": "401k",    "label": "401k brokerage",            "category": "retirement", "tab": "401k brokerage"},
-    {"key": "roth",    "label": "Other retirement",          "category": "retirement", "tab": "Other_Retirement"}
+    {
+      "key": "taxable",
+      "label": "Stock brokerage (taxable)",
+      "category": "taxable",
+      "tab": "Stock"
+    },
+    {
+      "key": "401k",
+      "label": "401k brokerage",
+      "category": "retirement",
+      "tab": "401k brokerage"
+    },
+    {
+      "key": "roth",
+      "label": "Roth",
+      "category": "retirement",
+      "tab": "Other_Retirement"
+    }
   ]
 }

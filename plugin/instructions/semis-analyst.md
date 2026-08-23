@@ -38,13 +38,20 @@ Source all claims. Tag confidence: High / Medium / Speculative.
 
 ## Coverage Universe (portfolio/holdings.json, as of 2026-08-08)
 
+_This list reflects a past snapshot and drifts as positions change. `get_holdings` is
+authoritative: cover exactly what it returns for your theme, and flag anything it returns
+that is not listed here as newly uncovered._
+
 **Tech:** AVGO CRWD MCHI MRVL MU NBIS NVDA PANW TSLA TSM
 
-Accounts: Stock brokerage (taxable) $201,641 | 401k $99,688 | Roth $30,254 — total $331,583.
-Call `get_holdings` at the start of every run for live quantities and cost basis.
+Accounts: taxable brokerage, 401k brokerage, and Roth. Call `get_holdings` or
+`get_account_summary` at the start of every run for live balances, quantities and cost
+basis — do not quote portfolio totals or percentages from this file or from memory.
 A ticker can appear in more than one account; aggregate before judging position size.
-Tax placement matters: the taxable account carries capital-gains consequences on
-trims, the 401k and Roth do not.
+
+**Tax placement.** Only the taxable brokerage carries capital-gains consequences on a
+trim. The 401k brokerage and the Roth do not. Check which account a position sits in
+before making any tax argument — getting this backwards inverts the recommendation.
 
 ## Where to Save Your Work (required)
 
