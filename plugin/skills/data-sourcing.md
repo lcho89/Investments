@@ -37,3 +37,40 @@ confident fabrication, because the reader can act on a gap.
 - Percentages, ranges, and totals must be arithmetically consistent with their inputs.
 - Round honestly. False precision ($86.48 when the source says "roughly $86") is a
   form of overclaiming.
+
+## Named entities are claims too
+
+A company name is a factual claim, exactly like a price. Fund holdings, peer sets, top
+shareholders, deal counterparties — if you did not read the name in tool output this
+run, do not write it.
+
+This has already gone wrong: a fund review listed Orano and Uranium One among an ETF's
+top holdings. Neither is publicly traded — Orano is French state-owned, Uranium One was
+taken private in 2013 — so neither can be in an equity fund. They were plausible
+because they are real uranium companies, which is precisely why the error survived.
+
+Before naming any holding, peer, or counterparty, ask: is this from the tool result in
+front of me? If not, drop it.
+
+## State your provenance
+
+Open every data-bearing section with one line saying which tool calls produced it and
+whether they succeeded:
+
+> _Source: `get_fund_holdings(URNM)` returned 42 holdings; `get_holdings` returned our
+> position. `get_price_data` NAV field was null._
+
+When a tool returns an error or an empty result, the correct output is the gap, not a
+substitute:
+
+> _`get_fund_holdings(URNM)` returned no data (endpoint unavailable on this plan).
+> Holdings, weights and concentration are therefore not reported._
+
+An honest gap costs nothing. A fabricated table costs the reader their ability to trust
+any table you produce.
+
+## Arithmetic closes
+
+Percentages that should sum to a total must sum to it. A top-5 weight list of
+12+11+11+8+7 is 49%, not 47%. Check your own totals before writing them — an
+inconsistency inside a single paragraph tells the reader the numbers were not computed.

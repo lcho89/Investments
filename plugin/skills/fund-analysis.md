@@ -43,7 +43,10 @@ Pull `get_fund_holdings` and `get_price_data`.
 
 ## 3. Concentration — is it diversification or a concentrated bet?
 
-From `get_fund_holdings`:
+From `get_fund_holdings`. **Every holding name and weight must come from that call.**
+If it returns an error or no rows, write "holdings not available — not reported" and
+move on. Never list holdings from memory: a plausible-but-wrong holding is undetectable
+to your PM and poisons the concentration and overlap analysis downstream.
 
 - Top 5 and top 10 weights. Above roughly 50% in the top 10, the fund is a concentrated
   bet wearing a diversified label. Say so.
@@ -71,6 +74,13 @@ Report it as a table:
 ```
 | Name | Direct | Via fund A | Via fund B | Total $ | % of portfolio |
 ```
+
+Two rules on this table:
+- **Weights come from `get_fund_holdings`.** Without them there is no look-through —
+  say so rather than substituting a guess at the overlap percentage.
+- **The denominator is total portfolio value across all accounts**, from
+  `get_account_summary`. Not one account. Stating a percentage against a single
+  account's balance overstates concentration and is a common error.
 
 Two conclusions follow, and both belong in the memo:
 - **Concentration** is higher than the position list suggests.
