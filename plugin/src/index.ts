@@ -3,6 +3,7 @@ import { getHoldings, getAccountSummary } from "./tools/portfolio.js";
 import { searchSecEdgar, fetchMarketNews, getPriceData } from "./tools/research.js";
 import { readThesis, writeThesis } from "./tools/thesis.js";
 import { getFinancials, getPeerComps, getOwnership, getFundHoldings } from "./tools/financials.js";
+import { listReports, readReport, searchReports } from "./tools/reports.js";
 
 const configSchema = z.object({
   newsApiKey: z.string().optional(),
@@ -31,6 +32,7 @@ const SKILL_KEYS = [
   "valuation-methods",
   "fund-analysis",
   "company-categorization",
+  "report-continuity",
   "pm-challenge",
 ];
 
@@ -256,6 +258,70 @@ const plugin = definePlugin({
         const cfg = await config(runCtx.companyId);
         if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
         return { data: await getFundHoldings(symbol, cfg.fmpApiKey, top ?? 25) };
+      }
+    );
+
+    ctx.tools.register(
+      "list_reports",
+      {
+        displayName: "List Past Reports",
+        description:
+          "List reports written previously, newest first, with a one-line summary. Call this before writing a new report so you can continue from your last one rather than starting over.",
+        parametersSchema: {
+          type: "object",
+          properties: {
+            agent: { type: "string", description: "Filter by agent slug, e.g. nuclear-analyst" },
+            since: { type: "string", description: "ISO date, e.g. 2026-07-01" },
+            limit: { type: "number", default: 40 },
+          },
+        },
+      },
+      async (params, runCtx) => {
+        const { agent, since, limit } = params as { agent?: string; since?: string; limit?: number };
+        const cfg = await config(runCtx.companyId);
+        return { data: listReports(cfg.repoPath, { agent, since, limit }) };
+      }
+    );
+
+    ctx.tools.register(
+      "read_report",
+      {
+        displayName: "Read a Past Report",
+        description:
+          "Read a previously written report by its repo-relative path, e.g. reports/nuclear-analyst/2026-08-22.md.",
+        parametersSchema: {
+          type: "object",
+          required: ["path"],
+          properties: { path: { type: "string" } },
+        },
+      },
+      async (params, runCtx) => {
+        const { path } = params as { path: string };
+        const cfg = await config(runCtx.companyId);
+        return { data: readReport(cfg.repoPath, path) };
+      }
+    );
+
+    ctx.tools.register(
+      "search_reports",
+      {
+        displayName: "Search Past Reports and Theses",
+        description:
+          "Full-text search across every report and thesis we have written. Use it to find what we previously concluded about a ticker, a theme, or a number before asserting something new.",
+        parametersSchema: {
+          type: "object",
+          required: ["query"],
+          properties: {
+            query: { type: "string" },
+            limit: { type: "number", default: 25 },
+            context: { type: "number", default: 1, description: "Lines of context each side" },
+          },
+        },
+      },
+      async (params, runCtx) => {
+        const { query, limit, context } = params as { query: string; limit?: number; context?: number };
+        const cfg = await config(runCtx.companyId);
+        return { data: searchReports(cfg.repoPath, query, { limit, context }) };
       }
     );
 

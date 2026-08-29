@@ -159,6 +159,46 @@ const manifest: PaperclipPluginManifestV1 = {
       },
     },
     {
+      name: "list_reports",
+      displayName: "List Past Reports",
+      description:
+        "List reports written previously, newest first, with a one-line summary. Call before writing a new report so you continue from the last one rather than starting over.",
+      parametersSchema: {
+        type: "object",
+        properties: {
+          agent: { type: "string" },
+          since: { type: "string" },
+          limit: { type: "number", default: 40 },
+        },
+      },
+    },
+    {
+      name: "read_report",
+      displayName: "Read a Past Report",
+      description:
+        "Read a previously written report by repo-relative path, e.g. reports/nuclear-analyst/2026-08-22.md.",
+      parametersSchema: {
+        type: "object",
+        required: ["path"],
+        properties: { path: { type: "string" } },
+      },
+    },
+    {
+      name: "search_reports",
+      displayName: "Search Past Reports and Theses",
+      description:
+        "Full-text search across every report and thesis we have written. Use to find what we previously concluded before asserting something new.",
+      parametersSchema: {
+        type: "object",
+        required: ["query"],
+        properties: {
+          query: { type: "string" },
+          limit: { type: "number", default: 25 },
+          context: { type: "number", default: 1 },
+        },
+      },
+    },
+    {
       name: "read_thesis",
       displayName: "Read Investment Thesis",
       description: "Read the stored investment thesis for a ticker from the theses/ directory.",
@@ -298,6 +338,13 @@ const manifest: PaperclipPluginManifestV1 = {
       description:
         "Classify a holding as slow grower, stalwart, cyclical, fast grower, turnaround, or asset play, run the category-specific analysis, and apply the matching sell triggers.",
       markdown: skillBody("company-categorization.md"),
+    },
+    {
+      skillKey: "report-continuity",
+      displayName: "Report Continuity",
+      description:
+        "How to build on prior work rather than starting fresh — read your last report, search what we concluded before, and lead with what changed. Use before writing any report, memo, or thesis update.",
+      markdown: skillBody("report-continuity.md"),
     },
     {
       skillKey: "pm-challenge",

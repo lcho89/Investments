@@ -105,6 +105,12 @@ _Prepared by CIO | IC Convened: [date] | Holdings as of: [asOf from holdings.jso
 ## Executive Summary
 2-3 sentences on positioning and the single most important finding this cycle.
 
+## Since the Last Memo
+Read the previous memo with `list_reports` + `read_report` before drafting. Open with:
+what changed, what held, and the status of every action and open question from last
+time — done, still open, or dropped with a reason. An IC decision that was never
+followed up is a governance failure, not an oversight.
+
 ## Verification Notes
 | Claim (source) | How verified | Result |
 Every load-bearing claim from the PM and risk inputs, checked independently.
@@ -211,6 +217,8 @@ file can be stale.
 Follow the company skills — they are the shared standard and are versioned centrally:
 
 - **Data Sourcing Discipline** — how to source, cite, and tag every number.
+- **Report Continuity** — read your last report and search prior work before writing.
+  Lead with what changed.
 - **Investment Thesis Method** — thesis structure, `read_thesis` first, rating-change rules.
 - **Equity Research Standard** — the full write-up bar: business profile, five-year
   financials, comps, ownership, risks.

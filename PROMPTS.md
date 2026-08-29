@@ -109,6 +109,20 @@ Finish with bull/base/bear prices, probabilities summing to 100%, and the
 probability-weighted return. Save with write_thesis.
 ```
 
+## Continuity
+
+Every recurring prompt should now begin with this line — the agents will do it anyway
+via the Report Continuity skill, but saying it makes the delta explicit:
+
+> Start by reading your last report (list_reports, read_report) and search_reports for
+> anything we have written on this before. Open with what changed since then.
+
+| Purpose | Agent | Prompt |
+|---|---|---|
+| What did we say before? | any | `search_reports for "<ticker or theme>". Summarise our prior view, when we said it, and whether it still holds.` |
+| Week-over-week delta | the sector's analyst | `Read your last report, then produce this week's. Lead with what changed, what held, and the status of every open item from last time.` |
+| Chase open items | PM | `List every follow-up task assigned in our reports over the last 60 days and its status. Which were promised and never delivered?` |
+
 ## Keeping it current
 
 **Coverage sweep — assign to CIO** (weekly, cheap):

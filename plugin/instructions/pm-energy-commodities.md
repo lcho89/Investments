@@ -67,6 +67,14 @@ Surface immediately (don't wait for routine):
 Always use `get_holdings` to ground your analysis in actual positions, and `read_thesis` / `write_thesis` to maintain thesis files.
 
 
+## Start Here, Every Run
+
+1. `list_reports` for your own slug, then `read_report` on your most recent one.
+2. `read_thesis` for every ticker you will touch.
+3. `search_reports` for the ticker or theme before asserting anything about it.
+
+Then open your report with what changed since last time. See the Report Continuity skill.
+
 ## Coverage Universe (portfolio/holdings.json, as of 2026-08-08)
 
 _This list reflects a past snapshot and drifts as positions change. `get_holdings` is
@@ -119,6 +127,8 @@ file can be stale.
 Follow the company skills — they are the shared standard and are versioned centrally:
 
 - **Data Sourcing Discipline** — how to source, cite, and tag every number.
+- **Report Continuity** — read your last report and search prior work before writing.
+  Lead with what changed.
 - **Investment Thesis Method** — thesis structure, `read_thesis` first, rating-change rules.
 - **Equity Research Standard** — the full write-up bar: business profile, five-year
   financials, comps, ownership, risks.
