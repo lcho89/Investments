@@ -38,6 +38,8 @@ const ROUTINE_KEYS = [
   "morning-brief",
   "weekly-deep-research",
   "portfolio-risk-check",
+  "coverage-sweep",
+  "calibration-review",
   "monthly-investment-memo",
 ];
 

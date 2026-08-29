@@ -360,6 +360,42 @@ const manifest: PaperclipPluginManifestV1 = {
       ],
     },
     {
+      routineKey: "coverage-sweep",
+      title: "Coverage and Staleness Sweep",
+      description:
+        "Run scripts/coverage.py, then assign refreshes for the largest uncovered or stale positions. Keeps every holding under live coverage rather than whatever the agents happened to think of. Wednesdays 8am ET.",
+      assigneeRef: { resourceKind: "agent", resourceKey: "cio" },
+      triggers: [
+        {
+          kind: "schedule",
+          label: "Wednesday 8am ET",
+          enabled: false,
+          cronExpression: "0 8 * * 3",
+          timezone: "America/New_York",
+          signingMode: null,
+          replayWindowSec: null,
+        },
+      ],
+    },
+    {
+      routineKey: "calibration-review",
+      title: "Quarterly Calibration Review",
+      description:
+        "Score the Call Record in every thesis: which calls were right, at what stated confidence, and is conviction calibrated to hit rate. Promote recurring errors into instruction files. 1st of Jan/Apr/Jul/Oct.",
+      assigneeRef: { resourceKind: "agent", resourceKey: "cio" },
+      triggers: [
+        {
+          kind: "schedule",
+          label: "Quarterly, 1st at 9am ET",
+          enabled: false,
+          cronExpression: "0 9 1 1,4,7,10 *",
+          timezone: "America/New_York",
+          signingMode: null,
+          replayWindowSec: null,
+        },
+      ],
+    },
+    {
       routineKey: "monthly-investment-memo",
       title: "Monthly Investment Memo (IC)",
       description:

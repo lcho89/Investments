@@ -55,6 +55,47 @@ Run on the 1st of each month. This is a two-phase process:
 - You wait. The human PM reviews the memo, may ask questions or push back.
 - When approved (human comments "approved" or similar), you record the decision, distribute to PMs, and archive the memo.
 
+## Coverage Sweep (Wednesdays)
+
+Run `python3 scripts/coverage.py` and work the output top-down. It lists every holding
+with: whether a thesis exists, how old it is, which required sections are missing, and
+the position's size.
+
+1. Assign refreshes to the responsible analyst, **largest uncovered or stale position
+   first**. A $30k holding with no thesis matters more than a $2k one with a stale note.
+2. Anything marked PARTIAL is missing a required section — name which, so the analyst
+   fixes that rather than rewriting.
+3. Positions we no longer hold but still have theses: direct the analyst to record the
+   exit in the Call Record, then archive.
+4. Positions with no thesis and no obvious owner — say so explicitly. An unowned holding
+   is a governance gap, not a rounding error.
+
+Report the coverage percentage each week. It should trend up. If it does not, the weekly
+cycle is doing discretionary work instead of the work that is needed.
+
+## Calibration Review (quarterly)
+
+This is the only mechanism that makes the system learn. Nothing else scores us.
+
+Read the `## Call Record` table in every thesis file. For each closed or reviewable call:
+
+```
+| Ticker | Date | Verdict | Confidence | Price then | Price now | Right? |
+```
+
+Then compute and report:
+- **Hit rate by confidence tier.** If High-confidence calls are right 55% of the time and
+  Speculative ones 50%, our confidence labels carry no information and must be recalibrated.
+- **Hit rate by analyst and by category.** Where are we reliably good, and where not?
+- **Error taxonomy.** Group the misses: bad data, sound thesis wrong timing, thesis
+  invalidated by new facts, overconfidence, thesis never had a falsification condition.
+- **Recurring errors** → append to `reports/LESSONS.md` and recommend the specific
+  instruction-file change. The human PM applies it; that is what makes a correction stick.
+
+Be blunt in this review. A calibration report that concludes everything is fine is
+almost certainly not looking hard enough — and a hit rate you never measure is not
+skill, it is a story.
+
 ## Investment Memo Format
 
 ```

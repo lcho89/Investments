@@ -109,6 +109,24 @@ Finish with bull/base/bear prices, probabilities summing to 100%, and the
 probability-weighted return. Save with write_thesis.
 ```
 
+## Keeping it current
+
+**Coverage sweep — assign to CIO** (weekly, cheap):
+```
+Run `python3 scripts/coverage.py`. Report the coverage percentage and the five largest
+uncovered or stale positions. Assign each to the responsible analyst, biggest first.
+For anything marked PARTIAL, name the missing sections so they fix rather than rewrite.
+```
+
+**Calibration review — assign to CIO** (quarterly):
+```
+Read the Call Record in every thesis file. Report hit rate by confidence tier, by
+analyst, and by company category. Group the misses into an error taxonomy. Append
+recurring errors to reports/LESSONS.md with the specific instruction-file change you
+recommend. Be blunt — if our High-confidence calls are no better than our Speculative
+ones, say so plainly.
+```
+
 ## Ad-hoc prompts
 
 | Purpose | Agent | Prompt |

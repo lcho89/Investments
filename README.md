@@ -51,6 +51,9 @@ source ~/.bashrc
 | `reports/<agent>/<date>.md` | Periodic agent reports. |
 | `scripts/start.sh` | Start the server (after reboot). |
 | `scripts/deploy.sh` | Provision/refresh agents, models, budgets. Idempotent. |
+| `scripts/coverage.py` | Which holdings lack a thesis, which are stale, which are incomplete. |
+| `scripts/refresh_holdings.py` | Rebuild holdings from the sheet after trading. |
+| `reports/LESSONS.md` | Recurring errors, promoted into instructions by you. |
 
 ## The agents
 
