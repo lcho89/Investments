@@ -298,6 +298,13 @@ const manifest: PaperclipPluginManifestV1 = {
   ],
   skills: [
     {
+      skillKey: "standing-commands",
+      displayName: "Standing Commands",
+      description:
+        "Short commands the human PM uses and what each expands to. Use whenever an issue is terse — 'weekly report', 'refresh URNM', 'coverage sweep' — so the full protocol runs without being spelled out.",
+      markdown: skillBody("standing-commands.md"),
+    },
+    {
       skillKey: "data-sourcing",
       displayName: "Data Sourcing Discipline",
       description:

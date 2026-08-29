@@ -26,6 +26,7 @@ const AGENT_KEYS = [
 ];
 
 const SKILL_KEYS = [
+  "standing-commands",
   "data-sourcing",
   "investment-thesis",
   "equity-research-standard",

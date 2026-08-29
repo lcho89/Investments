@@ -96,6 +96,8 @@ file can be stale.
 
 Follow the company skills — they are the shared standard and are versioned centrally:
 
+- **Standing Commands** — what short instructions like "weekly report" or
+  "refresh URNM" expand to. Run the full protocol, not the literal words.
 - **Data Sourcing Discipline** — how to source, cite, and tag every number.
 - **Report Continuity** — read your last report and search prior work before writing.
   Lead with what changed.
