@@ -1,14 +1,33 @@
 const BASE = "https://financialmodelingprep.com/api";
 
+const TIMEOUT_MS = 15000;
+
 async function fmp(path: string, key: string): Promise<any> {
   const sep = path.includes("?") ? "&" : "?";
-  const res = await fetch(`${BASE}${path}${sep}apikey=${key}`, {
-    headers: { "User-Agent": "investment-research-plugin/0.2" },
-  });
-  if (!res.ok) return { _error: `HTTP ${res.status} for ${path.split("?")[0]}` };
-  const json = await res.json();
-  if (json && (json as any)["Error Message"]) return { _error: (json as any)["Error Message"] };
-  return json;
+  const label = path.split("?")[0];
+  try {
+    const res = await fetch(`${BASE}${path}${sep}apikey=${key}`, {
+      headers: { "User-Agent": "investment-research-plugin/0.2" },
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    if (res.status === 429) return { _error: `rate limited (429) on ${label}` };
+    if (!res.ok) return { _error: `HTTP ${res.status} for ${label}` };
+    const json = await res.json();
+    if (json && (json as any)["Error Message"]) return { _error: (json as any)["Error Message"] };
+    return json;
+  } catch (e: any) {
+    // Never let a slow or hanging endpoint stall the agent's run.
+    return { _error: `${e?.name === "TimeoutError" ? "timed out" : "request failed"} on ${label}` };
+  }
+}
+
+/** Run promises a few at a time — firing 40 at once trips provider rate limits. */
+async function pool<T, R>(items: T[], size: number, fn: (t: T) => Promise<R>): Promise<R[]> {
+  const out: R[] = [];
+  for (let i = 0; i < items.length; i += size) {
+    out.push(...(await Promise.all(items.slice(i, i + size).map(fn))));
+  }
+  return out;
 }
 
 const pick = (o: any, keys: string[]) =>
@@ -157,10 +176,9 @@ export async function getPeerComps(
   const auto: string[] = Array.isArray(peerRes) ? peerRes[0]?.peersList ?? [] : [];
   const universe = Array.from(
     new Set([s, ...extraPeers.map((p) => p.toUpperCase()), ...auto])
-  ).slice(0, 13);
+  ).slice(0, 9);
 
-  const rows = await Promise.all(
-    universe.map(async (t) => {
+  const rows = await pool(universe, 3, async (t) => {
       const [prof, ttm, growth] = await Promise.all([
         fmp(`/v3/profile/${t}`, key),
         fmp(`/v3/key-metrics-ttm/${t}`, key),
@@ -190,8 +208,7 @@ export async function getPeerComps(
         dividendYieldPct:
           k?.dividendYieldTTM != null ? Number((k.dividendYieldTTM * 100).toFixed(2)) : null,
       };
-    })
-  );
+  });
 
   const stat = (field: string) => {
     const v = rows
