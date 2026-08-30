@@ -4,6 +4,7 @@ import { searchSecEdgar, fetchMarketNews, getPriceData } from "./tools/research.
 import { readThesis, writeThesis } from "./tools/thesis.js";
 import { getFinancials, getPeerComps, getOwnership, getFundHoldings } from "./tools/financials.js";
 import { listReports, readReport, searchReports } from "./tools/reports.js";
+import { buildDcfModel, buildCompsModel } from "./tools/model.js";
 
 const configSchema = z.object({
   newsApiKey: z.string().optional(),
@@ -259,6 +260,74 @@ const plugin = definePlugin({
         const cfg = await config(runCtx.companyId);
         if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
         return { data: await getFundHoldings(symbol, cfg.fmpApiKey, top ?? 25) };
+      }
+    );
+
+    ctx.tools.register(
+      "build_dcf_model",
+      {
+        displayName: "Build DCF Model (xlsx)",
+        description:
+          "Build a real Excel DCF workbook with live formulas — Assumptions (input cells), Historicals (from get_financials), DCF (formula-driven revenue build through implied price/share), and a 5x5 Sensitivity grid. Changing an Assumptions cell recomputes the model in Excel. Saved to models/. Use this instead of typing a DCF as markdown.",
+        parametersSchema: {
+          type: "object",
+          required: ["symbol", "assumptions"],
+          properties: {
+            symbol: { type: "string" },
+            assumptions: {
+              type: "object",
+              required: ["revenueGrowthPct", "terminalGrowthPct", "exitMultipleEbitda", "wacc"],
+              properties: {
+                revenueGrowthPct: {
+                  type: "array",
+                  items: { type: "number" },
+                  minItems: 5,
+                  maxItems: 5,
+                  description: "5 forward annual growth rates as decimals, e.g. 0.08 for 8%",
+                },
+                terminalGrowthPct: { type: "number" },
+                exitMultipleEbitda: { type: "number" },
+                wacc: { type: "number" },
+                grossMarginPct: { type: "number" },
+                operatingMarginPct: { type: "number" },
+                taxRatePct: { type: "number" },
+                capexPctRevenue: { type: "number" },
+                nwcPctRevenueChange: { type: "number" },
+                sharesOutstandingDiluted: { type: "number" },
+                netDebt: { type: "number" },
+              },
+            },
+          },
+        },
+      },
+      async (params, runCtx) => {
+        const { symbol, assumptions } = params as { symbol: string; assumptions: any };
+        const cfg = await config(runCtx.companyId);
+        if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
+        return { data: await buildDcfModel({ repoPath: cfg.repoPath, symbol, fmpKey: cfg.fmpApiKey, assumptions }) };
+      }
+    );
+
+    ctx.tools.register(
+      "build_comps_model",
+      {
+        displayName: "Build Comps Model (xlsx)",
+        description:
+          "Build a real Excel trading-comparables workbook from get_peer_comps — one row per peer with live multiples, a median/mean/P25/P75 stats block, and implied EV formulas for the subject. Saved to models/. Use this instead of typing a comps table as markdown.",
+        parametersSchema: {
+          type: "object",
+          required: ["symbol"],
+          properties: {
+            symbol: { type: "string" },
+            extraPeers: { type: "array", items: { type: "string" } },
+          },
+        },
+      },
+      async (params, runCtx) => {
+        const { symbol, extraPeers } = params as { symbol: string; extraPeers?: string[] };
+        const cfg = await config(runCtx.companyId);
+        if (!cfg.fmpApiKey) return { error: "FMP API key not configured" };
+        return { data: await buildCompsModel({ repoPath: cfg.repoPath, symbol, fmpKey: cfg.fmpApiKey, extraPeers }) };
       }
     );
 

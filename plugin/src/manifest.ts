@@ -159,6 +159,50 @@ const manifest: PaperclipPluginManifestV1 = {
       },
     },
     {
+      name: "build_dcf_model",
+      displayName: "Build DCF Model (xlsx)",
+      description:
+        "Build a real Excel DCF workbook with live formulas — Assumptions, Historicals, DCF, and a 5x5 Sensitivity grid. Changing an Assumptions cell recomputes the model in Excel. Saved to models/. Use instead of typing a DCF as markdown.",
+      parametersSchema: {
+        type: "object",
+        required: ["symbol", "assumptions"],
+        properties: {
+          symbol: { type: "string" },
+          assumptions: {
+            type: "object",
+            required: ["revenueGrowthPct", "terminalGrowthPct", "exitMultipleEbitda", "wacc"],
+            properties: {
+              revenueGrowthPct: { type: "array", items: { type: "number" }, minItems: 5, maxItems: 5 },
+              terminalGrowthPct: { type: "number" },
+              exitMultipleEbitda: { type: "number" },
+              wacc: { type: "number" },
+              grossMarginPct: { type: "number" },
+              operatingMarginPct: { type: "number" },
+              taxRatePct: { type: "number" },
+              capexPctRevenue: { type: "number" },
+              nwcPctRevenueChange: { type: "number" },
+              sharesOutstandingDiluted: { type: "number" },
+              netDebt: { type: "number" },
+            },
+          },
+        },
+      },
+    },
+    {
+      name: "build_comps_model",
+      displayName: "Build Comps Model (xlsx)",
+      description:
+        "Build a real Excel trading-comparables workbook — live peer multiples, stats block, implied EV formulas. Saved to models/. Use instead of typing a comps table as markdown.",
+      parametersSchema: {
+        type: "object",
+        required: ["symbol"],
+        properties: {
+          symbol: { type: "string" },
+          extraPeers: { type: "array", items: { type: "string" } },
+        },
+      },
+    },
+    {
       name: "list_reports",
       displayName: "List Past Reports",
       description:

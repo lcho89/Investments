@@ -28,7 +28,14 @@ concentration, and look-through overlap.
 
 ## Discounted cash flow
 
-Build from `get_financials`, not from memory.
+**Build the model with `build_dcf_model`** — a real Excel workbook with live formulas,
+not a markdown table. It pulls five years of actuals from `get_financials` for the
+Historicals sheet, puts your assumptions in editable yellow input cells, and derives
+revenue → EBITDA → FCF → terminal value → implied price/share through formulas that
+recompute if you change an input. It also produces a 5×5 WACC/terminal-growth
+sensitivity grid as live formulas, not typed numbers.
+
+State your assumptions before calling it — the tool does not choose them for you:
 
 1. **Revenue forward five years** — bottom-up where possible: units × price, customers ×
    ARPU, or by segment. State the driver, not just a growth rate.
@@ -43,15 +50,21 @@ Build from `get_financials`, not from memory.
    they disagree materially, say so; that disagreement is information.
 7. **EV → equity** — subtract net debt, minority interest, preferred.
 8. **Per share** — divide by fully diluted shares including options and RSUs.
-9. **Sensitivity** — a 5×5 table of implied price across WACC and terminal growth. The
-   single point estimate matters less than the shape of this grid.
+9. **Sensitivity** is built automatically as a live 5×5 grid around your WACC/terminal
+   growth inputs. The single point estimate matters less than the shape of this grid.
 
-If terminal value is more than ~75% of total value, flag it. That is a statement that
-you cannot really value the business, only its perpetuity assumption.
+Cite the model's file path in your report (e.g. `models/CEG-DCF-2026-08-30.xlsx`) and
+state the implied price it produced — do not silently retype the number as if you
+derived it by hand. If terminal value is more than ~75% of enterprise value (the model
+reports this on the DCF sheet), flag it: that is a statement that you cannot really
+value the business, only its perpetuity assumption.
 
 ## Trading comparables
 
-From `get_peer_comps`.
+**Build the model with `build_comps_model`** — a real Excel workbook, not a markdown
+table. It pulls `get_peer_comps`, writes one row per peer with live multiples, and adds
+a median/mean/P25/P75 stats block plus implied-EV formulas for the subject — all live,
+so replacing or dropping a peer recomputes the range.
 
 - **Peer selection is the analysis.** 8–12 names, comparable on business model, size,
   growth and margins. Justify each inclusion in one line. Drop the ones that are not
