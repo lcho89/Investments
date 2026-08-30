@@ -41,6 +41,24 @@ except Exception as e:
     print('could not read plugins:', e)
 " 2>&1
 
+line "BUDGETS"
+_CID=$(curl -s $API/companies 2>/dev/null | python3 -c "import sys,json;d=json.load(sys.stdin);print(d[0]['id'] if d else '')" 2>/dev/null)
+if [ -n "$_CID" ]; then
+  curl -s "$API/companies/$_CID/agents" 2>/dev/null > /tmp/_agents.json
+  python3 - /tmp/_agents.json <<'BUDGETPY'
+import sys, json
+agents = json.load(open(sys.argv[1]))
+for a in agents:
+    cap = a.get("budgetMonthlyCents", 0)
+    spent = a.get("spentMonthlyCents", 0)
+    if cap:
+        pct = spent / cap * 100
+        flag = "  <-- AT OR OVER CAP" if spent >= cap else ("  <-- near cap" if pct > 80 else "")
+        print("%-28s $%7.2f / $%6.2f  (%5.1f%%)%s" % (a["name"][:26], spent/100, cap/100, pct, flag))
+BUDGETPY
+  rm -f /tmp/_agents.json
+fi
+
 line "AGENTS"
 COMPANY_ID=$(curl -s $API/companies 2>/dev/null | python3 -c "import sys,json;d=json.load(sys.stdin);print(d[0]['id'] if d else '')" 2>/dev/null)
 echo "companyId: ${COMPANY_ID:-NONE}"

@@ -100,6 +100,12 @@ API = "http://localhost:3100/api"
 # with invention — non-existent fund holdings, manufactured metrics, arithmetic
 # that did not close. Format compliance without factual grounding is the worst
 # failure mode here, because the output looks more rigorous than it is.
+# Override with CIO_MODEL=claude-sonnet-4-6 (or another tier) if Fable is too
+# expensive for your account's usage limits — the monthly memo is the single most
+# expensive routine, so if the IC keeps failing on cost, this is the first lever.
+import os as _os
+cio_model = _os.environ.get("CIO_MODEL", "claude-fable-5")
+
 ORG = {
     "Nuclear Analyst":          ("nuclear-analyst",        "PM: Energy & Commodities", "claude-sonnet-4-6", 8),
     "Commodities Analyst":      ("commodities-analyst",    "PM: Energy & Commodities", "claude-sonnet-4-6", 8),
@@ -109,7 +115,7 @@ ORG = {
     "Portfolio Risk Analyst":   ("portfolio-risk-analyst", "CIO",                      "claude-sonnet-4-6", 5),
     "PM: Energy & Commodities": ("pm-energy-commodities",  "CIO",                      "claude-sonnet-4-6", 10),
     "PM: Technology":           ("pm-technology",          "CIO",                      "claude-sonnet-4-6", 10),
-    "CIO":                      ("cio",                    None,                       "claude-fable-5",    20),
+    "CIO":                      ("cio",                    None,                       cio_model,           20),
 }
 
 def call(method, path, payload=None):
