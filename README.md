@@ -54,6 +54,7 @@ source ~/.bashrc
 | `scripts/coverage.py` | Which holdings lack a thesis, which are stale, which are incomplete. |
 | `scripts/refresh_holdings.py` | Rebuild holdings from the sheet after trading. |
 | `reports/LESSONS.md` | Recurring errors, promoted into instructions by you. |
+| `RUNBOOK.md` | Step-by-step weekly order — what to run, in what order, to whom. |
 
 ## The agents
 
