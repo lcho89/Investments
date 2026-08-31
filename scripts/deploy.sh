@@ -34,7 +34,11 @@ echo "==> Server healthy."
 
 # ── 2. Build plugin ─────────────────────────────────────────────────
 cd "$REPO_DIR/plugin"
-[ -d node_modules ] || npm install --silent
+# Always install: npm's own lockfile check makes this a fast no-op when nothing
+# changed, and a stale node_modules missing a newly-added dependency (like the
+# exceljs addition) is exactly what an existence-only check like
+# `[ -d node_modules ] || npm install` fails to catch.
+npm install --silent
 npm run build --silent
 echo "==> Plugin built."
 
