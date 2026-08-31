@@ -104,11 +104,13 @@ API = "http://localhost:3100/api"
 # with invention — non-existent fund holdings, manufactured metrics, arithmetic
 # that did not close. Format compliance without factual grounding is the worst
 # failure mode here, because the output looks more rigorous than it is.
-# Override with CIO_MODEL=claude-sonnet-4-6 (or another tier) if Fable is too
-# expensive for your account's usage limits — the monthly memo is the single most
-# expensive routine, so if the IC keeps failing on cost, this is the first lever.
+# CIO runs Sonnet by default. Fable's per-token rate is markedly higher, and
+# since the CIO is the highest-volume agent — the monthly memo alone reads
+# every PM report and verifies claims independently — it was the fastest way
+# to burn through the account's monthly spend limit. Override with
+# CIO_MODEL=claude-fable-5 (or another tier) if you want the stronger model back.
 import os as _os
-cio_model = _os.environ.get("CIO_MODEL", "claude-fable-5")
+cio_model = _os.environ.get("CIO_MODEL", "claude-sonnet-4-6")
 
 ORG = {
     "Nuclear Analyst":          ("nuclear-analyst",        "PM: Energy & Commodities", "claude-sonnet-4-6", 8),

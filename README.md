@@ -60,7 +60,7 @@ source ~/.bashrc
 
 | Agent | Model | Budget/mo | Reports to |
 |---|---|---|---|
-| CIO | Fable 5 | $20 | you |
+| CIO | Sonnet 4.6 (override: `CIO_MODEL=claude-fable-5`) | $20 | you |
 | PM: Energy & Commodities | Sonnet 4.6 | $10 | CIO |
 | PM: Technology | Sonnet 4.6 | $10 | CIO |
 | Portfolio Risk Analyst | Sonnet 4.6 | $5 | CIO |
