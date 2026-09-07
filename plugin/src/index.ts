@@ -10,6 +10,9 @@ const configSchema = z.object({
   newsApiKey: z.string().optional(),
   fmpApiKey: z.string().optional(),
   repoPath: z.string().default(process.env.HOME ? `${process.env.HOME}/Investments` : "/home/user/Investments"),
+  // Ad-hoc analyses the user produces outside this agent system (a separate
+  // Claude Project, saved on the Windows side). Read-only, outside git.
+  adhocPath: z.string().default("/mnt/c/Lechern/Investments/adhoc"),
 });
 
 type Config = z.infer<typeof configSchema>;
@@ -349,7 +352,7 @@ const plugin = definePlugin({
       async (params, runCtx) => {
         const { agent, since, limit } = params as { agent?: string; since?: string; limit?: number };
         const cfg = await config(runCtx.companyId);
-        return { data: listReports(cfg.repoPath, { agent, since, limit }) };
+        return { data: listReports(cfg.repoPath, { agent, since, limit, adhocPath: cfg.adhocPath }) };
       }
     );
 
@@ -368,7 +371,7 @@ const plugin = definePlugin({
       async (params, runCtx) => {
         const { path } = params as { path: string };
         const cfg = await config(runCtx.companyId);
-        return { data: readReport(cfg.repoPath, path) };
+        return { data: readReport(cfg.repoPath, path, cfg.adhocPath) };
       }
     );
 
@@ -391,7 +394,7 @@ const plugin = definePlugin({
       async (params, runCtx) => {
         const { query, limit, context } = params as { query: string; limit?: number; context?: number };
         const cfg = await config(runCtx.companyId);
-        return { data: searchReports(cfg.repoPath, query, { limit, context }) };
+        return { data: searchReports(cfg.repoPath, query, { limit, context, adhocPath: cfg.adhocPath }) };
       }
     );
 

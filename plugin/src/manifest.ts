@@ -47,6 +47,12 @@ const manifest: PaperclipPluginManifestV1 = {
         description: "Absolute path to the Investments repo (for reading/writing theses)",
         default: "/home/user/Investments",
       },
+      adhocPath: {
+        type: "string",
+        description:
+          "Absolute path to the user's ad-hoc analysis folder (produced outside this agent system, e.g. a separate Claude Project on Windows). Read-only; indexed alongside reports/theses by list_reports/search_reports.",
+        default: "/mnt/c/Lechern/Investments/adhoc",
+      },
     },
   },
   tools: [
@@ -206,7 +212,7 @@ const manifest: PaperclipPluginManifestV1 = {
       name: "list_reports",
       displayName: "List Past Reports",
       description:
-        "List reports written previously, newest first, with a one-line summary. Call before writing a new report so you continue from the last one rather than starting over.",
+        "List reports written previously, newest first, with a one-line summary. Includes the user's ad-hoc analysis folder (source: adhoc), not just agent output. Call before writing a new report so you continue from the last one rather than starting over.",
       parametersSchema: {
         type: "object",
         properties: {
@@ -220,7 +226,7 @@ const manifest: PaperclipPluginManifestV1 = {
       name: "read_report",
       displayName: "Read a Past Report",
       description:
-        "Read a previously written report by repo-relative path, e.g. reports/nuclear-analyst/2026-08-22.md.",
+        "Read a previously written report by path, e.g. reports/nuclear-analyst/2026-08-22.md, or an ad-hoc analysis path returned by list_reports/search_reports, e.g. adhoc/NVDA-notes.md.",
       parametersSchema: {
         type: "object",
         required: ["path"],
@@ -231,7 +237,7 @@ const manifest: PaperclipPluginManifestV1 = {
       name: "search_reports",
       displayName: "Search Past Reports and Theses",
       description:
-        "Full-text search across every report and thesis we have written. Use to find what we previously concluded before asserting something new.",
+        "Full-text search across every report and thesis we have written, plus the user's ad-hoc analysis folder (paths prefixed adhoc/). Use to find what we previously concluded before asserting something new.",
       parametersSchema: {
         type: "object",
         required: ["query"],

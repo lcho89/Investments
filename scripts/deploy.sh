@@ -75,8 +75,9 @@ fi
 
 # ── 6. Plugin tool keys ─────────────────────────────────────────────
 PLUGIN_ID=$(curl -s $API/plugins | python3 -c "import sys,json;print([p['id'] for p in json.load(sys.stdin) if p['pluginKey']=='investment-research'][0])")
+ADHOC_PATH="${ADHOC_PATH:-/mnt/c/Lechern/Investments/adhoc}"
 curl -s -X POST "$API/plugins/$PLUGIN_ID/config" -H "Content-Type: application/json" \
-  -d "{\"repoPath\":\"$REPO_DIR\",\"newsApiKey\":\"${NEWSAPI_KEY:-}\",\"fmpApiKey\":\"${FMP_API_KEY:-}\"}" >/dev/null
+  -d "{\"repoPath\":\"$REPO_DIR\",\"adhocPath\":\"$ADHOC_PATH\",\"newsApiKey\":\"${NEWSAPI_KEY:-}\",\"fmpApiKey\":\"${FMP_API_KEY:-}\"}" >/dev/null
 echo "==> Plugin config saved."
 
 # ── 6b. Load agent instructions + reporting hierarchy ───────────────

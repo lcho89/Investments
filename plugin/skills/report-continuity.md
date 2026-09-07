@@ -21,6 +21,11 @@ report that could have been written in any week is not worth its cost.
    and Call Record.
 4. **`search_reports`** for the ticker or theme before asserting anything about it. If we
    have written about it before, your new view must be reconciled with the old one.
+5. Check for **`source: adhoc`** entries in `list_reports`, or `adhoc/...` paths in
+   `search_reports` results. These come from the user's own separate ad-hoc analysis
+   (done outside this agent system) — read them with `read_report`. Do not treat a
+   ticker as uncovered just because no agent has a thesis on file if ad-hoc work exists;
+   fold in or explicitly reconcile against the user's own prior conclusions.
 
 ## Lead with what changed
 
